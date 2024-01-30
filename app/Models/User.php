@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
 use App\Models\Event;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -30,10 +31,13 @@ class User extends Authenticatable
     ];
 
     /**
-     *relationShip 
+     *relationShip
      */
     public function events()  {
         return $this->hasMany(Event::class);
+    }
+    public function role()  {
+        return $this->belongTo(Role::class);
     }
     /**
      * The attributes that should be hidden for serialization.

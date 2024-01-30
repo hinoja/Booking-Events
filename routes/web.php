@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Events\EventsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// FRONT OFFICE
+Route::get('/',[EventsController::class,'index'] )->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('/faq','front.events.faq')->name('faq');
+Route::view('/contact-us','front.events.contact')->name('contact');
 
+// -----------------------------------------------------------------------------
+
+// BACK OFFICE
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

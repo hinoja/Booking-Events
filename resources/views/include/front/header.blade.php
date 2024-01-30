@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-inner">
         <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0">
-            <div class="container">	
+            <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon">
                         <i class="fa-solid fa-bars"></i>
@@ -33,7 +33,7 @@
                                     <span>Create Event</span>
                                 </a>
                             </div>
-                        </div>							
+                        </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="index.html">Home</a>
@@ -48,6 +48,13 @@
                                     <li><a class="dropdown-item" href="online_event_detail_view.html">Online Event Detail View</a></li>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('contact')}}">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('faq') }}">FAQ</a>
+                            </li>
+
                             {{-- <li class="nav-item">
                                 <a class="nav-link" href="pricing.html">Pricing</a>
                             </li>
@@ -60,16 +67,7 @@
                                     <li><a class="dropdown-item" href="blog_detail_view.html">Blog Detail View</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Help
-                                </a>
-                                <ul class="dropdown-menu dropdown-submenu">
-                                    <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
-                                    <li><a class="dropdown-item" href="help_center.html">Help Center</a></li>
-                                    <li><a class="dropdown-item" href="contact_us.html">Contact Us</a></li>
-                                </ul>
-                            </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Pages
@@ -154,8 +152,8 @@
                                 </li>
                                 <li class="profile-link">
                                     <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
-                                    <a href="organiser_profile_view.html" class="link-item">My Profile</a>									
-                                    <a href="sign_in.html" class="link-item">Sign Out</a>									
+                                    <a href="organiser_profile_view.html" class="link-item">My Profile</a>
+                                    <a href="sign_in.html" class="link-item">Sign Out</a>
                                 </li>
                             </ul>
                         </li>

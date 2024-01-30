@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
         )->create();
         Event::factory(10)->create();
 
-    
+
     }
 }

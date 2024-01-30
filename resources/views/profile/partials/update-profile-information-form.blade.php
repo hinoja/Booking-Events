@@ -1,4 +1,4 @@
-<section>
+{{-- <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -28,7 +28,7 @@
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
@@ -61,4 +61,43 @@
             @endif
         </div>
     </form>
-</section>
+</section> --}}
+<div class="tab-pane fade show active" id="tab-01" role="tabpanel">
+    <div class="bp-title">
+        <h4>Profile Information</h4>
+    </div>
+    <div class="password-setting p-4">
+        <div class="password-des">
+            <p>@lang("Update your account's profile information and email address.")</p>
+        </div>
+        {{-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+            @csrf
+        </form> --}}
+        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+            @csrf
+            @method('patch')
+            <div class="change-password-form">
+                <div class="form-group mt-4">
+                    <label for="name" class="form-label">{{ __('Name') }}
+                        *</label>
+                    <div class="loc-group position-relative">
+                        <input id="name" name="name" type="text" class="form-control h_50"
+                            value="{{ Auth::user()->name }}" placeholder="Enter your password">
+                        <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <label for="email" class="form-label">{{ __('Email') }}*</label>
+                    <div class="loc-group position-relative">
+                        <input class="form-control h_50" id="email" name="email" type="email"
+                            value="{{ Auth::user()->email }}" placeholder="Enter your password">
+                        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+
+                    </div>
+                </div>
+                <button class="main-btn btn-hover w-100 mt-5" type="submit">Save</button>
+            </div>
+            <form>
+
+    </div>
+</div>
