@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Events\EventsController;
@@ -16,13 +17,17 @@ use App\Http\Controllers\Events\EventsController;
 */
 
 // FRONT OFFICE
-Route::get('/',[EventsController::class,'index'] )->name('welcome');
+Route::get('/', [EventsController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::view('/faq','front.events.faq')->name('faq');
-Route::view('/contact-us','front.events.contact')->name('contact');
+Route::name('front.')->group(function () {
+    Route::view('/faq', 'front.events.faq')->name('faq');
+    Route::get('/event/create', [EventsController::class, 'create'])->name('event.create');
+    Route::get('/event/{Event:id}', [EventsController::class, 'show'])->name('event.show');
+    Route::view('/contact-us', 'front.events.contact')->name('contact');
+});
 
 // -----------------------------------------------------------------------------
 
@@ -33,4 +38,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -25,11 +27,42 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $message = '';
+        $remember = (bool) $request->remember;
+        if (!Auth::attemptWhen([
+            'email' => $request->email,
+            'password' => $request->password,
+        ], fn (User $user) => $user->canLogin())) {
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                if (Hash::check($request->password, $user->password) && (!$user->canLogin())) {
+                    $message = 'auth.disabled';
+                } else {
+                    $message = 'auth.failed';
+                }
+            } else {
+                $message = 'auth.failed';
+            }
+            throw ValidationException::withMessages([
+                'email' => trans($message),
+            ]);
+        }
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $auth = auth()->user();
+        if ($auth->role_id === 1) //admin
+        {
+            // $redirect = 'admin/dashboard';
+            $redirect = '/';
+        } elseif ($auth->role_id === 2) //organisator
+        {
+            $redirect = '/profile';
+        } else {
+            $redirect = '/';
+        }
+
+        return redirect()->intended($redirect);
     }
 
     /**

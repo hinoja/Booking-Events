@@ -28,6 +28,7 @@
     </div>
 </x-app-layout> --}}
 @extends('layout.front')
+@section('title', __('Subscriber profile'))
 @section('content')
     <!-- Follow People Model Start-->
     <div class="modal fade" id="FFModal" tabindex="-1" aria-labelledby="FFModalLabel" aria-hidden="true">
@@ -297,207 +298,7 @@
         </div>
     </div>
     <!-- About Details Model End-->
-    <!-- Header Start-->
-    <header class="header">
-        <div class="header-inner">
-            <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0">
-                <div class="container">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="navbar-toggler-icon">
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </button>
-                    <a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="index.html">
-                        <div class="res-main-logo">
-                            <img src="images/logo-icon.svg" alt="">
-                        </div>
-                        <div class="main-logo" id="logo">
-                            <img src="images/logo.svg" alt="">
-                            <img class="logo-inverse" src="images/dark-logo.svg" alt="">
-                        </div>
-                    </a>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <div class="offcanvas-header">
-                            <div class="offcanvas-logo" id="offcanvasNavbarLabel">
-                                <img src="images/logo-icon.svg" alt="">
-                            </div>
-                            <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div class="offcanvas-top-area">
-                                <div class="create-bg">
-                                    <a href="create.html" class="offcanvas-create-btn">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>Create Event</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Explore Events
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-submenu">
-                                        <li><a class="dropdown-item" href="explore_events.html">Explore Events</a></li>
-                                        <li><a class="dropdown-item" href="venue_event_detail_view.html">Venue Event
-                                                Detail View</a></li>
-                                        <li><a class="dropdown-item" href="online_event_detail_view.html">Online Event
-                                                Detail View</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pricing.html">Pricing</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Blog
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-submenu">
-                                        <li><a class="dropdown-item" href="our_blog.html">Our Blog</a></li>
-                                        <li><a class="dropdown-item" href="blog_detail_view.html">Blog Detail View</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Help
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-submenu">
-                                        <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
-                                        <li><a class="dropdown-item" href="help_center.html">Help Center</a></li>
-                                        <li><a class="dropdown-item" href="contact_us.html">Contact Us</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Pages
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-submenu">
-                                        <li>
-                                            <a class="dropdown-item submenu-item" href="#">Other Pages</a>
-                                            <ul class="submenu dropdown-menu">
-                                                <li><a class="dropdown-item pe-5" href="sign_in.html">Sign In</a></li>
-                                                <li><a class="dropdown-item pe-5" href="sign_up.html">Sign Up</a></li>
-                                                <li><a class="dropdown-item pe-5" href="forgot_password.html">Forgot
-                                                        Password</a></li>
-                                                <li><a class="dropdown-item pe-5" href="about_us.html">About Us</a></li>
-                                                <li><a class="dropdown-item pe-5" href="checkout.html">Checkout</a></li>
-                                                <li><a class="dropdown-item pe-5" href="checkout_premium.html">Checkout
-                                                        Premium</a></li>
-                                                <li><a class="dropdown-item pe-5" href="invoice.html">Invoice</a></li>
-                                                <li><a class="dropdown-item pe-5" href="coming_soon.html">Coming Soon</a>
-                                                </li>
-                                                <li><a class="dropdown-item pe-5" href="error_404.html">Error 404</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item submenu-item" href="#">Create Event</a>
-                                            <ul class="submenu dropdown-menu">
-                                                <li><a class="dropdown-item pe-5" href="create.html">Create</a></li>
-                                                <li><a class="dropdown-item pe-5" href="create_venue_event.html">Create
-                                                        Venue Event</a></li>
-                                                <li><a class="dropdown-item pe-5" href="create_online_event.html">Create
-                                                        Online Event</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item submenu-item" href="#">Events View</a>
-                                            <ul class="submenu dropdown-menu">
-                                                <li><a class="dropdown-item pe-5"
-                                                        href="online_event_detail_view.html">Online Event Detail View</a>
-                                                </li>
-                                                <li><a class="dropdown-item pe-5"
-                                                        href="venue_event_detail_view.html">Venue Event Detail View</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="dropdown-item" href="booking_confirmed.html">Booking Confirmed</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="attendee_profile_view.html">Attendee Profile
-                                                View</a></li>
-                                        <li><a class="dropdown-item" href="organiser_profile_view.html">Organiser Profile
-                                                View</a></li>
-                                        <li><a class="dropdown-item" href="my_organisation_dashboard.html">Organization
-                                                Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="sell_tickets_online.html">Sell Tickets
-                                                Online</a></li>
-                                        <li><a class="dropdown-item" href="refer_a_friend.html">Refer a Friend</a></li>
-                                        <li><a class="dropdown-item" href="term_and_conditions.html">Terms &
-                                                Conditions</a></li>
-                                        <li><a class="dropdown-item" href="privacy_policy.html">Privacy Policy</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="offcanvas-footer">
-                            <div class="offcanvas-social">
-                                <h5>Follow Us</h5>
-                                <ul class="social-links">
-                                    <li><a href="#" class="social-link"><i class="fab fa-facebook-square"></i></a>
-                                    <li><a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                                    <li><a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                    <li><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                                    <li><a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-header order-2">
-                        <ul class="align-self-stretch">
-                            <li>
-                                <a href="create.html" class="create-btn btn-hover">
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                    <span>Create Event</span>
-                                </a>
-                            </li>
-                            <li class="dropdown account-dropdown">
-                                <a href="#" class="account-link" role="button" id="accountClick"
-                                    data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/profile-imgs/img-13.jpg" alt="">
-                                    <i class="fas fa-caret-down arrow-icon"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"
-                                    aria-labelledby="accountClick">
-                                    <li>
-                                        <div class="dropdown-account-header">
-                                            <div class="account-holder-avatar">
-                                                <img src="images/profile-imgs/img-13.jpg" alt="">
-                                            </div>
-                                            <h5>{{ Auth::user()->name }}</h5>
-                                            <p>{{ Auth::user()->email }}</p>
-                                        </div>
-                                    </li>
-                                    <li class="profile-link">
-                                        <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
-                                        <a href="organiser_profile_view.html" class="link-item">My Profile</a>
-                                        <a href="sign_in.html" class="link-item">Sign Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="night_mode_switch__btn">
-                                    <div id="night-mode" class="fas fa-moon fa-sun"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div class="overlay"></div>
-        </div>
-    </header>
-    <!-- Header End-->
+
     <!-- Body Start-->
     <div class="wrapper">
         <div class="profile-banner">
@@ -524,7 +325,7 @@
                         <div class="col-xl-4 col-lg-5 col-md-12">
                             <div class="main-card user-left-dt">
                                 <div class="user-avatar-img">
-                                    <img src="images/profile-imgs/img-13.jpg" alt="">
+                                    <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
                                     <div class="avatar-img-btn">
                                         <input type="file" id="avatar-img">
                                         <label for="avatar-img"><i class="fa-solid fa-camera"></i></label>
@@ -535,22 +336,20 @@
                                                 class="fa-solid fa-circle-check"></i></span></h4>
                                     <span class="user-email">{{ Auth::user()->email }}</span>
                                 </div>
-                                <div class="ff-block">
-                                    <a href="#" class="" role="button" data-bs-toggle="modal"
-                                        data-bs-target="#FFModal"><span>0</span>Followers</a>
-                                    <a href="#" class="" role="button" data-bs-toggle="modal"
-                                        data-bs-target="#FFModal"><span>2</span>Following</a>
-                                </div>
+
                                 <div class="user-description">
-                                    <p>Hey I am a John Doe</p>
+                                    <p>Hey Je suis un {{ auth()->user()->role->name }}</p>
                                 </div>
-                                <div class="user-btns">
-                                    <a href="my_organisation_dashboard.html"
-                                        class="co-main-btn co-btn-width min-width d-inline-block h_40">My Organisation<i
-                                            class="fa-solid fa-right-left ms-3"></i></a>
-                                </div>
+                                @if (auth()->user()->role_id === 2)
+                                    {{-- organisator --}}
+                                    <div class="user-btns">
+                                        <a href="my_organisation_dashboard.html"
+                                            class="co-main-btn co-btn-width min-width d-inline-block h_40">My
+                                            Organisation<i class="fa-solid fa-right-left ms-3"></i></a>
+                                    </div>
+                                @endif
                                 <div class="profile-social-link">
-                                    <h6>Find me on</h6>
+                                    <h6>Les reseaux sociaux</h6>
                                     <div class="social-links">
                                         <a href="#" class="social-link" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Facebook"><i
@@ -575,20 +374,22 @@
                             <div class="right-profile">
                                 <div class="profile-tabs">
                                     <ul class="nav nav-pills nav-fill p-2 garren-line-tab" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="feed-tab" data-bs-toggle="tab"
-                                                href="#feed" role="tab" aria-controls="feed"
-                                                aria-selected="true"><i class="fa-solid fa-house"></i>Home</a>
-                                        </li>
+                                        @if (auth()->user()->role_id === 2)
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="feed-tab" data-bs-toggle="tab"
+                                                    href="#feed" role="tab" aria-controls="feed"
+                                                    aria-selected="true"><i class="fa-solid fa-house"></i>Home</a>
+                                            </li>
+                                        @endif
                                         <li class="nav-item">
                                             <a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about"
                                                 role="tab" aria-controls="about" aria-selected="false"><i
-                                                    class="fa-solid fa-circle-info"></i>About</a>
+                                                    class="fa-solid fa-circle-info"></i>@lang('About')</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="#setting"
                                                 role="tab" aria-controls="setting" aria-selected="false"><i
-                                                    class="fa-solid fa-gear"></i>Setting</a>
+                                                    class="fa-solid fa-gear"></i>Paramètres</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders"
@@ -723,7 +524,7 @@
                                                 </div>
                                                 <div class="about-details">
                                                     <div class="about-step">
-                                                        <h5>Name</h5>
+                                                        <h5>@lang('Name')</h5>
                                                         <span>{{ Auth::user()->name }}</span>
                                                         {{-- <span>{{ Auth::user()->role }}</span> --}}
                                                     </div>
@@ -735,7 +536,7 @@
                                                             in, varius eget augue.</p>
                                                     </div>
                                                     <div class="about-step">
-                                                        <h5>Find me on</h5>
+                                                        <h5>Disponible sur reseaux sociaux</h5>
                                                         <div class="social-links">
                                                             <a href="#" class="social-link"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
@@ -781,7 +582,7 @@
                                                                 data-bs-target="#tab-02" type="button" role="tab"
                                                                 aria-controls="tab-02" aria-selected="false"><i
                                                                     class="fa-solid fa-key me-3"></i>{{ __('Password
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Settings') }}</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Settings') }}</button>
                                                             <button class="tab-link" data-bs-toggle="tab"
                                                                 data-bs-target="#tab-03" type="button" role="tab"
                                                                 aria-controls="tab-03" aria-selected="false"><i

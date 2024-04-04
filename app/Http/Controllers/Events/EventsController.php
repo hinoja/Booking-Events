@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Events;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class EventsController extends Controller
 {
@@ -13,7 +14,9 @@ class EventsController extends Controller
      */
     public function index()
     {
-       return view('index');
+        $events = Event::latest()->with(['user'])->where('is_active', true)->paginate(12);
+
+        return view('index', ['events' => $events, 'categories' => Category::query()->latest()->get()]);
     }
 
     /**
@@ -21,7 +24,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('front.events.add');
     }
 
     /**
@@ -35,9 +38,11 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // dd($event);
+        $event = Event::find($id);
+        return view('front.events.details', ['event' => $event]);
     }
 
     /**

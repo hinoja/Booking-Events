@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
-use Illuminate\Database\Seeder;
+
+use App\Models\Category;
+use  Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -12,64 +13,64 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create([
+        Category::create([
             'name' => 'Arts',
         ]);
-        Role::create([
-            'name' => 'Business',
+        Category::create([
+            'name' => 'Affaires',
         ]);
-        Role::create([
-            'name' => 'Coaching and Consulting',
+        Category::create([
+            'name' => 'Coaching et conseil',
         ]);
-        Role::create([
-            'name' => 'Community and Culture',
+        Category::create([
+            'name' => 'Communauté et culture',
         ]);
-        Role::create([
-            'name' => 'Education and Training',
+        Category::create([
+            'name' => 'Education and Formations',
         ]);
-        Role::create([
-            'name' => 'Family and Friends',
+        Category::create([
+            'name' => 'La Famille et les amis',
         ]);
-        Role::create([
-            'name' => 'Fashion and Beauty',
+        Category::create([
+            'name' => 'Mode et beauté',
         ]);
-        Role::create([
-            'name' => 'Film and Entertainment',
+        Category::create([
+            'name' => 'Film et divertissement',
         ]);
-        Role::create([
-            'name' => 'Food and Drink',
+        Category::create([
+            'name' => 'Nourriture et boissons',
         ]);
-        Role::create([
-            'name' => 'Health and Wellbeing',
+        Category::create([
+            'name' => 'Santé et bien-être',
         ]);
-        Role::create([
-            'name' => 'Hobbies and Interest',
+        Category::create([
+            'name' => 'Loisirs et intérêts',
         ]);
-        Role::create([
-            'name' => 'Conference',
+        Category::create([
+            'name' => 'Conférence',
         ]);
-        Role::create([
-            'name' => 'Religion and Spirituality',
+        Category::create([
+            'name' => 'Religion and Spiritualité',
         ]);
-        Role::create([
-            'name' => 'Music and Theater',
+        Category::create([
+            'name' => 'Music and Théâtre',
         ]);
-        Role::create([
-            'name' => 'Science and Technology',
+        Category::create([
+            'name' => 'Science and Technologie',
         ]);
-        Role::create([
+        Category::create([
             'name' => 'Sports and Fitness',
         ]);
-        Role::create([
-            'name' => 'Travel and Outdoor',
+        Category::create([
+            'name' => 'Voyages et activités de plein air',
         ]);
-        Role::create([
-            'name' => 'Visual Arts',
+        Category::create([
+            'name' => 'Arts Visuel',
         ]);
-        Role::create([
-            'name' => 'Gig',
+        Category::create([
+            'name' => 'Libre',
         ]);
-        Role::create([
+        Category::create([
             'name' => 'Hotel',
         ]);
     }

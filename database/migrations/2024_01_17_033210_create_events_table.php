@@ -16,14 +16,15 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('image')->nullable();
             $table->string('slug');
-            $table->string('place'); 
+            $table->string('place');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->longtext('description');
-            $table->dateTime('date');
+            $table->date('date');
             $table->boolean('is_active')->default(true);
+            $table->time('start_at')->nullable();
+            $table->integer('duration')->nullable();
             $table->string('status')->nullable();
-            $table->datetime('hour')->nullable();
             $table->timestamps();
         });
     }

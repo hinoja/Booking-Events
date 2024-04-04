@@ -66,8 +66,7 @@
                     </div>
                 </a>
                 <div class="app-top-right-link">
-                    Already have an account?<a class="sidebar-register-link" href="{{ route('login') }}">Sign
-                        In</a>
+                    @lang('Already registered?')<a class="sidebar-register-link" href="{{ route('login') }}">@lang('Sign In')</a>
                 </div>
             </div>
         </div>
@@ -75,14 +74,14 @@
             <div class="registration">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    <h2 class="registration-title">Sign up to Barren</h2>
+                    <h2 class="registration-title">S'enregister sur Barren</h2>
                     <div class="row mt-1">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mt-4">
                                 <label class="form-label">First Name <span class="text-success">*</span></label>
                                 <input name="name" class="form-control h_50" type="text" placeholder="Konate"
                                     value="{{ old('name') }}">
-                                    <span><x-input-error :messages="$errors->get('name')" class="mt-2" /></span>
+                                <span><x-input-error :messages="$errors->get('name')" class="mt-2" /></span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">

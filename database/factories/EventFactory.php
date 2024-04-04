@@ -20,13 +20,17 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $name=fake()->unique()->name(),
-            'slug' => Str::slug($name), 
+            'name' => $name = fake()->unique()->realText(),
+            'slug' => Str::slug($name),
             'place' => fake('it_IT')->city(),
             'user_id' => User::factory(),
-            'category_id' => Category::factory(),
-            'description' => fake()->realText(), 
-            'date' => fake()->dateTimeBetween($startDate='now',$endDate='+2 years'),      
+            'category_id' => fake()->numberBetween(1, 20),
+            'description' => fake()->paragraph(32),
+            'is_active' => fake()->boolean(68),
+            'duration' => $number=fake()->numberBetween(1,6),
+            'date' => fake()->date($max=now()->addRealWeeks($number)),
+            'start_at' => fake()->time($format='H:i'),
+            // 'date' => fake()->date($startDate = 'now', $endDate = '+2 years'),
         ];
     }
 }

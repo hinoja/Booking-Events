@@ -2,24 +2,26 @@
     <div class="header-inner">
         <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon">
                         <i class="fa-solid fa-bars"></i>
                     </span>
                 </button>
-                <a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="index.html">
+                <a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="{{ route('welcome') }}">
                     <div class="res-main-logo">
-                        <img src="images/logo-icon.svg" alt="">
+                        <img src="{{ asset('images/logo-icon.svg') }}" alt="">
                     </div>
                     <div class="main-logo" id="logo">
-                        <img src="images/logo.svg" alt="">
-                        <img class="logo-inverse" src="images/dark-logo.svg" alt="">
+                        <img src="{{ asset('images/dark-logo.svg') }}" alt="">
+                        <img class="logo-inverse" src="{{ asset('images/dark-logo.svg') }}" alt="">
                     </div>
                 </a>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <div class="offcanvas-logo" id="offcanvasNavbarLabel">
-                            <img src="images/logo-icon.svg" alt="">
+                            <img class="logo-inverse" src="{{ asset('images/dark-logo.svg') }}" alt="">
                         </div>
                         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
                             <i class="fa-solid fa-xmark"></i>
@@ -36,23 +38,16 @@
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('welcome') }}">@lang('Home')</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Explore Events
-                                </a>
-                                <ul class="dropdown-menu dropdown-submenu">
-                                    <li><a class="dropdown-item" href="explore_events.html">Explore Events</a></li>
-                                    <li><a class="dropdown-item" href="venue_event_detail_view.html">Venue Event Detail View</a></li>
-                                    <li><a class="dropdown-item" href="online_event_detail_view.html">Online Event Detail View</a></li>
-                                </ul>
+
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page"
+                                    href="{{ route('front.contact') }}">@lang('Contact us')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('contact')}}">Contact Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('faq') }}">FAQ</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('front.faq') }}">FAQ</a>
                             </li>
 
                             {{-- <li class="nav-item">
@@ -129,34 +124,56 @@
                 </div>
                 <div class="right-header order-2">
                     <ul class="align-self-stretch">
-                        <li>
-                            <a href="create.html" class="create-btn btn-hover">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <span>Create Event</span>
-                            </a>
-                        </li>
-                        <li class="dropdown account-dropdown">
-                            <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="images/profile-imgs/img-13.jpg" alt="">
-                                <i class="fas fa-caret-down arrow-icon"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end" aria-labelledby="accountClick">
-                                <li>
-                                    <div class="dropdown-account-header">
-                                        <div class="account-holder-avatar">
-                                            <img src="images/profile-imgs/img-13.jpg" alt="">
+                        @auth
+                            <li>
+                                <a href="{{ route('front.event.create') }}" class="create-btn btn-hover">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <span>Creer un Evènement </span>
+                                </a>
+                            </li>
+                            <li class="dropdown account-dropdown">
+                                <a href="#" class="account-link" role="button" id="accountClick"
+                                    data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
+                                    <i class="fas fa-caret-down arrow-icon"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"
+                                    aria-labelledby="accountClick">
+                                    <li>
+                                        <div class="dropdown-account-header">
+                                            <div class="account-holder-avatar">
+                                                <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
+                                            </div>
+                                            <h5>{{ Auth::user()->name }}</h5>
+                                            <p>{{ Auth::user()->email }}</p>
                                         </div>
-                                        <h5>John Doe</h5>
-                                        <p>johndoe@example.com</p>
-                                    </div>
-                                </li>
-                                <li class="profile-link">
-                                    <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
-                                    <a href="organiser_profile_view.html" class="link-item">My Profile</a>
-                                    <a href="sign_in.html" class="link-item">Sign Out</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    </li>
+                                    <li class="profile-link">
+                                        @if (Auth()->user()->role_id == 2)
+                                        <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
+                                        @endif
+                                        <a href="{{ route('profile.edit') }}" class="link-item">Mon Profile</a>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                                class="dropdown-item has-icon text-danger">
+                                                <i class="fas fa-sign-out-alt"></i> @lang('Log Out')
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ route('login') }}" class="create-btn btn-hover">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span>Se connecter </span>
+                                </a>
+                            </li>
+                        @endauth
+
                         <li>
                             <div class="night_mode_switch__btn">
                                 <div id="night-mode" class="fas fa-moon fa-sun"></div>

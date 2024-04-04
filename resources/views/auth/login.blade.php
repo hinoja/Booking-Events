@@ -1,53 +1,5 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
 @extends('layouts.authLayout')
-@section('title',"Login")
+@section('title', __('Log in'))
 @section('content')
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-10">
@@ -59,7 +11,7 @@
                     </div>
                 </a>
                 <div class="app-top-right-link">
-                    New to Barren?<a class="sidebar-register-link" href="{{ route('register') }}">Sign up</a>
+                    Nouveau sur Barren?<a class="sidebar-register-link" href="{{ route('register') }}"> S'enregistrer </a>
                 </div>
             </div>
         </div>
@@ -67,25 +19,29 @@
             <div class="registration">
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
-                    <h2 class="registration-title">Sign in to Barren</h2>
+                    <h2 class="registration-title">{{ __('Log in') }} sur Barren</h2>
                     <div class="form-group mt-5">
-                        <label class="form-label">Your Email*</label>
-                        <input name="email" class="form-control h_50" type="email" placeholder="Enter your email" value="{{ old('email') }}">
+                        <label class="form-label">Votre Email <span class="text text-success"> *</span></label>
+                        <input name="email" class="form-control h_50" type="email" placeholder="Enter your email"
+                            value="{{ old('email') }}">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
+                    <br>
                     <div class="form-group mt-4">
                         <div class="field-password">
-                            <label class="form-label">Password*</label>
-                            <a class="forgot-pass-link" href="forgot_password.html">Forgot Password?</a>
+                            <label class="form-label">{{ __('Password') }} <span class="text text-success">*</span></label>
+                            {{-- <a class="forgot-pass-link" href="forgot_password.html"> {{ __('Forgot your password?') }} </a> --}}
                         </div>
                         <div class="loc-group position-relative">
-                            <input name="password" class="form-control h_50"   type="password" placeholder="Enter your password">
+                            <input name="password" class="form-control h_50" type="password"
+                                placeholder="Enter your password">
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             {{-- <span class="pass-show-eye"><i class="fas fa-eye-slash"></i></span> --}}
                         </div>
                     </div>
                     <button class="main-btn btn-hover w-100 mt-4" type="submit"
-                        onclick="window.location.href='index.html'">Sign In <i class="fas fa-sign-in-alt ms-2"></i></button>
+                        onclick="window.location.href='index.html'">Se Connecter <i
+                            class="fas fa-sign-in-alt ms-2"></i></button>
                 </form>
                 <div class="divider">
                     <span>or</span>
@@ -110,10 +66,10 @@
                             </g>
                         </svg>
                         Sign in with Google
-                    </button> 
+                    </button>
                 </div>
                 <div class="new-sign-link">
-                    New to Barren?<a class="signup-link" href="sign_up.html">Sign up</a>
+                    New to Barren?<a class="signup-link" href="sign_up.html"> {{ __('Log in') }}</a>
                 </div>
             </div>
         </div>

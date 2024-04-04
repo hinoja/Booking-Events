@@ -23,18 +23,19 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             CategorySeeder::class,
         ]);
+
         User::factory()->create([
-            'name' => $name='Admin',
+            'name' => $name = 'Admin',
             'email' => 'admin@bookingevents.com',
             'role_id' => '1',
-            'avatar' => fake()->image('public/storage/avatars/users/', 500, 500, $name, false),
             'password' => Hash::make('password'),
         ]);
-        User::factory(10)->has(
-            Event::factory(6)
-        )->create();
-        Event::factory(10)->create();
 
+        // Event::factory(20)->create();
+
+        User::factory(10)->has(
+            Event::factory(rand(1, 5))
+        )->create();
 
     }
 }
