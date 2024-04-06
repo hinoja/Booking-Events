@@ -37,6 +37,13 @@
                             </div>
                         </div>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe_5">
+                           @if (auth()->user()->role->id== 1 || auth()->user()->role->id== 2 )
+                           <li class="nav-item">
+                            <a class="nav-link" href="{{ route('profile.edit') }}">
+                                <i class="fa-solid fa-right-left me-2"></i>Ma Maison
+                            </a>
+                        </li>
+                           @endif
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page"
                                     href="{{ route('welcome') }}">@lang('Home')</a>
@@ -152,7 +159,7 @@
                                     </li>
                                     <li class="profile-link">
                                         @if (Auth()->user()->role_id == 2)
-                                            <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
+                                            <a href=""{{ route('admin.users') }} class="link-item">@lang('dashboard')</a>
                                         @endif
                                         <a href="{{ route('profile.edit') }}" class="link-item">Mon Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">
@@ -188,3 +195,7 @@
         <div class="overlay"></div>
     </div>
 </header>
+
+
+
+

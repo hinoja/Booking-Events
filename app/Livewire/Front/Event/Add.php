@@ -37,7 +37,7 @@ class Add extends Component
     public function next()
     {
 
-        $data = $this->validate((new EventRequest())->rules());
+        // $data = $this->validate((new EventRequest())->rules());
         // dd($data);
         $this->step++;
     }

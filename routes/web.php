@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::controller(EventsController::class)
+    ->group(function () {
+
+        Route::get('/',  'index')->name('welcome');
+    });
+// Route::view('/faq', 'front.events.faq')->name('faq');
+Route::name('admin.')->prefix('admin')->group(function () {
+    Route::controller(UserController::class)
+    ->group(function () {
+
+        Route::get('/users',  'index')->name('users');
+    });
 });
 
 require __DIR__ . '/auth.php';

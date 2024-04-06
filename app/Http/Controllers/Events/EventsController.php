@@ -29,14 +29,6 @@ class EventsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show($id)
@@ -56,9 +48,9 @@ class EventsController extends Controller
 
         if (!$request->search && !$categorie) {
             $events = Event::query()->latest()
-                                    ->where('is_active', true)
-                                    ->with(['category'])
-                                    ->paginate(12);
+                ->where('is_active', true)
+                ->with(['category'])
+                ->paginate(12);
             return view('front.events.index', [
                 'events' => $events,
                 'categories' => Category::query()->orderBy('name', 'asc')->get(),
