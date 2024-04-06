@@ -9,35 +9,7 @@
                         <div class="hero-banner-content">
                             <h2>Découvrez des événements pour tout ce que vous aimez</h2>
                             <div class="search-form main-form">
-                                <div class="row g-3">
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group search-category">
-                                            <select class="selectpicker" data-width="100%" data-size="5">
-                                                <option value="browse_all" data-icon="fa-solid fa-tower-broadcast" selected>
-                                                    Tout Rechercher</option>
-                                                <option value="online_events" data-icon="fa-solid fa-video">Online Events
-                                                </option>
-                                                <option value="venue_events" data-icon="fa-solid fa-location-dot">Venue
-                                                    Events</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group">
-                                            <select class="selectpicker" data-width="100%" data-size="5"
-                                                data-live-search="true">
-                                                <option value="#">Tout</option>
-
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-12">
-                                        <a href="#" class="main-btn btn-hover w-100">Rechercher</a>
-                                    </div>
-                                </div>
+                                @include('include.front.searchBar')
                             </div>
                         </div>
                     </div>
@@ -47,7 +19,34 @@
         <div class="explore-events p-80">
             <div class="container">
                 <div class="row">
+                    @if ($category = request()->category)
+                        <h4 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('For category')
+                            <strong class="a-link">{{ $category->name }}
+                                ({{ $events->count() }})</strong>
+                        </h4>
+                    @elseif (request()->isMethod('post'))
+                        <h4 class="text-center wow fadeInUp" data-wow-delay="0.1s">@lang('Search results') : <strong
+                                class="a-link">
+                                @if ($events === '')
+                                    0
+                                @else
+                                    {{ $events->count() }}
+                                @endif
+                            </strong> @lang('Evènement(s) trouvé(s)')
+                        </h4>
+                        <p class="text-center mb-5 fst-italic">
+                            <span>
+                                @lang('Catégorie') : <strong
+                                    class="a-link">{{ request()->category_id ? App\Models\Category::find(request()->category_id)->name : trans('Empty') }}</strong>,
+
+                                Nom : <strong class="a-link">{{ request()->search ?? trans('Empty') }}</strong>
+
+                            </span>
+                        </p>
+                    @endif
+
                     <div class="col-xl-12 col-lg-12 col-md-12">
+
                         <div class="event-filter-items">
                             <div class="featured-controls">
                                 <div class="controls">

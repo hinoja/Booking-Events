@@ -44,10 +44,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page"
-                                    href="{{ route('front.contact') }}">@lang('Contact us')</a>
+                                    href="{{ route('contact') }}">@lang('Contact us')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('front.faq') }}">FAQ</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('faq') }}">FAQ</a>
                             </li>
 
                             {{-- <li class="nav-item">

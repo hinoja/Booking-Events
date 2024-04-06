@@ -17,17 +17,24 @@ use App\Http\Controllers\Events\EventsController;
 */
 
 // FRONT OFFICE
-Route::get('/', [EventsController::class, 'index'])->name('welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-Route::name('front.')->group(function () {
-    Route::view('/faq', 'front.events.faq')->name('faq');
-    Route::get('/event/create', [EventsController::class, 'create'])->name('event.create');
-    Route::get('/event/{Event:id}', [EventsController::class, 'show'])->name('event.show');
-    Route::view('/contact-us', 'front.events.contact')->name('contact');
-});
+Route::view('/dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+
+Route::controller(EventsController::class)
+    ->group(function () {
+        Route::name('front.')->group(function () {
+            Route::get('/event/create', 'create')->name('event.create');
+            Route::get('/event/{Event:id}', 'show')->name('event.show');
+            Route::post('/search', 'search')->name('search');
+        });
+        Route::get('/',  'index')->name('welcome');
+    });
+Route::view('/faq', 'front.events.faq')->name('faq');
+Route::view('/contact-us', 'front.events.contact')->name('contact');
+
 
 // -----------------------------------------------------------------------------
 
