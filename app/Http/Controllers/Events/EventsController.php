@@ -16,7 +16,7 @@ class EventsController extends Controller
     {
         $events = Event::latest()->with(['user'])->where('is_active', true)->paginate(12);
 
-        return view('index', ['events' => $events, 'categories' => Category::query()->latest()->get()]);
+        return view('front.events.index', ['events' => $events, 'categories' => Category::query()->latest()->get()]);
     }
 
     /**
@@ -40,7 +40,7 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        // dd($event);
+        // dd        ($event);
         $event = Event::find($id);
         return view('front.events.details', ['event' => $event]);
     }

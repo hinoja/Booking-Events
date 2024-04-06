@@ -125,16 +125,18 @@
                 <div class="right-header order-2">
                     <ul class="align-self-stretch">
                         @auth
-                            <li>
-                                <a href="{{ route('front.event.create') }}" class="create-btn btn-hover">
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                    <span>Creer un Evènement </span>
-                                </a>
-                            </li>
+                            @if (Auth()->user()->role_id == 2)
+                                <li>
+                                    <a href="{{ route('front.event.create') }}" class="create-btn btn-hover">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <span>Creer un Evènement </span>
+                                    </a>
+                                </li>
+                            @endif
                             <li class="dropdown account-dropdown">
                                 <a href="#" class="account-link" role="button" id="accountClick"
                                     data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
+                                    <img src="{{  auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('images/profile-imgs/img-13.png') }}" alt="">
                                     <i class="fas fa-caret-down arrow-icon"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"
@@ -142,7 +144,7 @@
                                     <li>
                                         <div class="dropdown-account-header">
                                             <div class="account-holder-avatar">
-                                                <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
+                                                <img src="{{auth()->user()->avatar ? Storage::url(auth()->user()->avatar) :  asset('images/profile-imgs/img-13.png') }}" alt="">
                                             </div>
                                             <h5>{{ Auth::user()->name }}</h5>
                                             <p>{{ Auth::user()->email }}</p>
@@ -150,7 +152,7 @@
                                     </li>
                                     <li class="profile-link">
                                         @if (Auth()->user()->role_id == 2)
-                                        <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
+                                            <a href="my_organisation_dashboard.html" class="link-item">My Organisation</a>
                                         @endif
                                         <a href="{{ route('profile.edit') }}" class="link-item">Mon Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">

@@ -1,3 +1,4 @@
+
 @php
     use Carbon\Carbon;
 @endphp
@@ -30,11 +31,11 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-top-dts">
-                            <div class="event-top-date">
+                            <div class="event-top-date" >
                                 <span class="event-month">Apr
-                                    {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
-                                    {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
-                                </span>
+                                     {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
+                                     {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
+                                    </span>
                                 <span class="event-date">{{ Carbon::parse($event->date)->format('d') }}</span>
                             </div>
                             <div class="event-top-dt">

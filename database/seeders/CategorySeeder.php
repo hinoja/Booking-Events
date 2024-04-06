@@ -73,5 +73,8 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => 'Hotel',
         ]);
+        Category::create([
+            'name' => 'Autres',
+        ]);
     }
 }

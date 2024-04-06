@@ -325,7 +325,7 @@
                         <div class="col-xl-4 col-lg-5 col-md-12">
                             <div class="main-card user-left-dt">
                                 <div class="user-avatar-img">
-                                    <img src="{{ asset('images/profile-imgs/img-13.png') }}" alt="">
+                                    <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) :  asset('images/profile-imgs/img-13.png') }}" alt="">
                                     <div class="avatar-img-btn">
                                         <input type="file" id="avatar-img">
                                         <label for="avatar-img"><i class="fa-solid fa-camera"></i></label>

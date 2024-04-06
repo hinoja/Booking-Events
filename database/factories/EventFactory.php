@@ -20,11 +20,12 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $name = fake()->unique()->realText(),
+            'name' => $name = fake()->unique()->realText(100),
             'slug' => Str::slug($name),
             'place' => fake('it_IT')->city(),
             'user_id' => User::factory(),
             'category_id' => fake()->numberBetween(1, 20),
+            'type' => fake()->numberBetween(1, 2),
             'description' => fake()->paragraph(32),
             'is_active' => fake()->boolean(68),
             'duration' => $number=fake()->numberBetween(1,6),

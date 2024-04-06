@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->time('start_at')->nullable();
             $table->integer('duration')->nullable();
-            $table->string('status')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
     }

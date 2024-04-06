@@ -84,7 +84,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="fr" class="h-100">
 
 <!-- Mirrored from www.gambolthemes.net/html-items/barren-html/disable-demo-link/sign_in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Jan 2024 06:56:46 GMT -->
 
@@ -107,14 +107,17 @@
                 <div class="container">
                     @yield('content')
                 </div>
-                {{-- <div class="copyright-footer">
-                    © 2024, Barren. All rights reserved. Powered by Gambolthemes
-                </div> --}}
+
             </div>
         </div>
     </div>
 
-
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/OwlCarousel/owl.carousel.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('vendor/mixitup/dist/mixitup.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
 </body>
 

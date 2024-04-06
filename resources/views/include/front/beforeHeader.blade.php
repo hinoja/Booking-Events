@@ -14,7 +14,7 @@
 <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
     rel="stylesheet">
-<link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+<link href="{{ asset('vendor/unicons-2.0.1/css/unicons.css') }}" rel='stylesheet'>
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 <link href="{{ asset('css/night-mode.css') }}" rel="stylesheet">

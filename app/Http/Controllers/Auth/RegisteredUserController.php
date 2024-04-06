@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register', ['roles' => Role::query()->latest()->get()]);
     }
 
     /**
@@ -32,23 +34,50 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required' , Rules\Password::defaults()],
+            'role_id' => ['required', 'exists:roles,id'],
+            'birth_date' => 'nullable|date',
+            'email' => [
+                'required', 'string', 'lowercase',
+                'email', 'max:255', 'unique:' . User::class
+            ],
+            'avatar' => 'nullable|image|mimes:jpeg,jpg,ico,png|max:512',
+            'password' => ['required', Rules\Password::defaults()],
         ]);
 
+
         $user = User::create([
-            $name='name' => $request->name,
+            'name' => $name = $request->name,
+            'slug' => $slug = Str::slug($name) . uniqid(),
             'email' => $request->email,
-            'role_id' => 2,//will be to edited 
-            'birth_date' => $request->birth_date ?$request->birth_date :null,
+            'role_id' => $request->role_id, //will be to edited
+            'birth_date' => $request->birth_date ? $request->birth_date : null,
             'password' => Hash::make($request->password),
-            // 'avatar' => fake()->image('public/storage/avatars/users/', 500, 500, $name, false)
-        ]); 
-         
-        event(new Registered($user));
+        ]);
+        if (isset($request->avatar)) {
+            $filename_chemin = 'avatars/' . $user->id . '.' . $request->avatar->getClientOriginalExtension();
+
+            $filename = $user->id . '.' . $request->avatar->getClientOriginalExtension();
+            $user->avatar = $filename_chemin;
+            $user->save();
+
+            $request->file('avatar')->storeAs('avatars', $filename, 'public');
+        }
+
+        // event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        if ($request->role_id === 1) //admin
+        {
+            // $redirect = 'admin/dashboard';
+            $redirect = '/';
+        } elseif ($request->role_id === 2) //organisator
+        {
+            $redirect = '/profile';
+        } else {
+            $redirect = '/';
+        }
+
+        return redirect()->intended($redirect);
     }
 }

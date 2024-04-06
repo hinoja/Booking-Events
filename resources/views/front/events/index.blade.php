@@ -50,19 +50,6 @@
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-filter-items">
                             <div class="featured-controls">
-                                {{-- <div class="filter-tag">
-                                    <a href="explore_events_by_date.html" class="active">All</a>
-                                    <a href="explore_events_by_date.html">Today</a>
-                                    <a href="explore_events_by_date.html">Tomorrow</a>
-                                    <a href="explore_events_by_date.html">This Week</a>
-                                    <a href="explore_events_by_date.html">This Weekend</a>
-                                    <a href="explore_events_by_date.html">Next Week</a>
-                                    <a href="explore_events_by_date.html">Next Weekend</a>
-                                    <a href="explore_events_by_date.html">This Month</a>
-                                    <a href="explore_events_by_date.html">Next Month</a>
-                                    <a href="explore_events_by_date.html">This Year</a>
-                                    <a href="explore_events_by_date.html">Next Year</a>
-                                </div> --}}
                                 <div class="controls">
                                     <button type="button" class="control" data-filter="all">All</button>
                                     <button type="button" class="control" data-filter=".arts">Arts</button>
@@ -92,7 +79,8 @@
                                                     <span class="bookmark-icon" title="Bookmark"></span>
                                                 </div>
                                                 <div class="event-content">
-                                                    <a href="{{ route('front.event.show', $event) }}" class="event-title">
+                                                    <a href="{{ route('front.event.show', $event->id) }}"
+                                                        class="event-title">
                                                         {{ $event->name }}</a>
                                                     <div class="duration-price-remaining">
                                                         <span class="duration-price">AUD $100.00*</span>
@@ -120,10 +108,6 @@
                                 <div class="mt-5 browse-btn" style="float: right;">
                                     {{ $events->links() }}
                                 </div>
-
-                                {{-- <div class="browse-btn">
-                                    <a href="#" class="main-btn btn-hover ">See More</a>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
