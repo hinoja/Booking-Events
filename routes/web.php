@@ -47,18 +47,13 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::controller(EventsController::class)
-    ->group(function () {
 
-        Route::get('/',  'index')->name('welcome');
-    });
 // Route::view('/faq', 'front.events.faq')->name('faq');
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::controller(UserController::class)
-    ->group(function () {
-
-        Route::get('/users',  'index')->name('users');
-    });
+        ->group(function () {
+            Route::get('/users',  'index')->name('users');
+        });
 });
 
 require __DIR__ . '/auth.php';

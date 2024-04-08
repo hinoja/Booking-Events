@@ -1,4 +1,3 @@
-
 @php
     use Carbon\Carbon;
 @endphp
@@ -31,11 +30,11 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-top-dts">
-                            <div class="event-top-date" >
+                            <div class="event-top-date">
                                 <span class="event-month">Apr
-                                     {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
-                                     {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
-                                    </span>
+                                    {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
+                                    {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
+                                </span>
                                 <span class="event-date">{{ Carbon::parse($event->date)->format('d') }}</span>
                             </div>
                             <div class="event-top-dt">
@@ -58,9 +57,9 @@
                                 <img src="{{ asset('images/event-imgs/big-2.jpg') }}" alt="">
                             </div>
                             <div class="share-save-btns dropdown">
-                                {{-- <button class="sv-btn me-2"><i class="fa-regular fa-bookmark me-2"></i>Save</button> --}}
                                 <button class="sv-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                        class="fa-solid fa-share-nodes me-2"></i>Partager</button>
+                                    class="fa-solid fa-share-nodes me-2"></i>Partager</button>
+                                   Categorie <button class="btn btn-outline-warning" class="sv-btn me-2"> {{ $event->category->name }}</button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i
                                                 class="fa-brands fa-facebook me-3"></i>Facebook</a></li>

@@ -16,12 +16,7 @@ class UserController extends Controller
         $users = User::query()
             ->with('role')
             ->with('events')
-            // ->with('departments')
-            // ->with('options')
-            // ->with('categories')
-            // ->with('keywords')
-            ->latest()->get();
-        // dd( $users);
+            ->latest()->get(); 
 
         return view('admin.users', compact('users'));
     }
