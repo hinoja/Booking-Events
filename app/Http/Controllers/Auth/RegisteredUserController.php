@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -61,6 +62,8 @@ class RegisteredUserController extends Controller
             $user->save();
 
             $request->file('avatar')->storeAs('avatars', $filename, 'public');
+
+            // Toastr::success('You Have Successfully created your account :)', 'Success!!');
         }
 
         // event(new Registered($user));

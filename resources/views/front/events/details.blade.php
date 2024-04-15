@@ -31,7 +31,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-top-dts">
                             <div class="event-top-date">
-                                <span class="event-month">Apr
+                                <span class="event-month"> {{ $event->price == 1 ? 'GRATUIT' : 'PAYANT' }}
+
                                     {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
                                     {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
                                 </span>
@@ -54,12 +55,14 @@
                     <div class="col-xl-8 col-lg-7 col-md-12">
                         <div class="main-event-dt">
                             <div class="event-img">
-                                <img src="{{ asset('images/event-imgs/big-2.jpg') }}" alt="">
+                                <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/big-2.jpg') }}"
+                                    alt="">
                             </div>
                             <div class="share-save-btns dropdown">
                                 <button class="sv-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                    class="fa-solid fa-share-nodes me-2"></i>Partager</button>
-                                   Categorie <button class="btn btn-outline-warning" class="sv-btn me-2"> {{ $event->category->name }}</button>
+                                        class="fa-solid fa-share-nodes me-2"></i>Partager</button>
+                                Categorie <button class="btn btn-outline-warning" class="sv-btn me-2">
+                                    {{ $event->category->name }}</button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i
                                                 class="fa-brands fa-facebook me-3"></i>Facebook</a></li>
@@ -73,7 +76,7 @@
                             </div>
                             <div class="main-event-content">
                                 <h4>A propos de cet évènement</h4>
-                                <p style="text-align:justify" class="text-justify"> {{ $event->description }} </p>
+                                <p style="text-align:justify" class="text-justify"> {!! $event->description !!} </p>
                             </div>
                         </div>
                     </div>
@@ -144,28 +147,34 @@
                                     <a href="#"><i class="fa-solid fa-location-dot me-2"></i>Voir la Carte</a>
                                 </div>
                             </div>
-                            <div class="select-tickets-block">
-                                <h6>Selectionnez les Tickets</h6>
-                                <div class="select-ticket-action">
-                                    <div class="ticket-price">AUD $75.00</div>
-                                    <div class="quantity">
-                                        <div class="counter">
-                                            <span class="down" onClick='decreaseCount(event, this)'>-</span>
-                                            <input type="text" value="0">
-                                            <span class="up" onClick='increaseCount(event, this)'>+</span>
+                            @auth
+                                @if (auth()->user()->role->id == 3)
+                                    <div class="select-tickets-block">
+                                        <h6>Selectionnez les Tickets</h6>
+                                        <div class="select-ticket-action">
+                                            <div class="ticket-price">AUD $75.00</div>
+                                            <div class="quantity">
+                                                <div class="counter">
+                                                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                                                    <input type="text" value="0">
+                                                    <span class="up" onClick='increaseCount(event, this)'>+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>2 x pair hand painted leather earrings 1 x glass of bubbles / or coffee Individual
+                                            grazing box / fruit cup</p>
+                                        <div class="xtotel-tickets-count">
+                                            <div class="x-title">1x Ticket(s)</div>
+                                            <h4>AUD <span>$0.00</span></h4>
                                         </div>
                                     </div>
-                                </div>
-                                <p>2 x pair hand painted leather earrings 1 x glass of bubbles / or coffee Individual
-                                    grazing box / fruit cup</p>
-                                <div class="xtotel-tickets-count">
-                                    <div class="x-title">1x Ticket(s)</div>
-                                    <h4>AUD <span>$0.00</span></h4>
-                                </div>
-                            </div>
-                            <div class="booking-btn">
-                                <a href="checkout.html" class="main-btn btn-hover w-100">Réserver Maintenant </a>
-                            </div>
+                                    <div class="booking-btn">
+                                        <a href="{{ route('bookingConfirmed') }}" class="main-btn btn-hover w-100">Réserver
+                                            Maintenant </a>
+                                    </div>
+                                @endif
+                            @endauth
+
                         </div>
                     </div>
                     @livewire('front.event.manage-event')

@@ -1,14 +1,19 @@
+@php
+    $currentRouteName = Route::currentRouteName();
+@endphp
 <nav class="vertical_nav">
     <div class="left_section menu_left" id="js-menu">
         <div class="left_section">
             <ul>
                 <li class="menu--item">
-                    <a href="my_organisation_dashboard.html" class="menu--link" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="my_organisation_dashboard.html" class="menu--link" title="Dashboard" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
                         <i class="fa-solid fa-gauge menu--icon"></i>
-                        <span class="menu--label">Dashboard</span>
+                        <span class="menu--label">@lang('dashboard')</span>
                     </a>
                 </li>
-                <li class="menu--item">
+
+                {{--  <li class="menu--item">
                     <a href="my_organisation_dashboard_events.html" class="menu--link" title="Events" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa-solid fa-calendar-days menu--icon"></i>
                         <span class="menu--label">Events</span>
@@ -31,14 +36,22 @@
                         <i class="fa-solid fa-credit-card menu--icon"></i>
                         <span class="menu--label">Payouts</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu--item">
-                    <a href="my_organisation_dashboard_reports.html" class="menu--link active" title="Reports" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa-solid fa-chart-pie menu--icon"></i>
-                        <span class="menu--label">Reports</span>
+                    <a href="{{ route('admin.users') }}" class="menu--link @if (Str::endsWith($currentRouteName, 'users')) active @endif" title="Reports"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa-solid fa-users menu--icon"></i>
+                        <span class="menu--label">@lang('Users')</span>
                     </a>
                 </li>
                 <li class="menu--item">
+                    <a href="{{ route('admin.events.index') }}" class="menu--link @if (Str::startsWith($currentRouteName, 'admin.events')) active @endif" title="Dashboard"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa-solid fa-calendar-days me-3 menu--icon"></i>
+                        <span class="menu--label">Evenements</span>
+                    </a>
+                </li>
+                {{-- <li class="menu--item">
                     <a href="my_organisation_dashboard_subscription.html" class="menu--link" title="Subscription" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa-solid fa-bahai menu--icon"></i>
                         <span class="menu--label">Subscription</span>
@@ -61,7 +74,7 @@
                         <i class="fa-solid fa-user-group menu--icon"></i>
                         <span class="menu--label">My Team</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

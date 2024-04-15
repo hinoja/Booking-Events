@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -51,6 +52,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $auth = auth()->user();
+        Toastr::success('Hello Dear '.Auth::user()->name.' :)', 'Success!!');
         if ($auth->role_id === 1) //admin
         {
             // $redirect = 'admin/dashboard';

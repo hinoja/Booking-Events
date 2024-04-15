@@ -1,4 +1,5 @@
 @extends('layout.front')
+@section('title',__('Foire Aux Questions'))
 @section('content')
     <!-- Body Start-->
     <div class="wrapper">

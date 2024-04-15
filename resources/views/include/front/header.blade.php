@@ -1,3 +1,7 @@
+@php
+    $currentRouteName = Route::currentRouteName();
+@endphp
+
 <header class="header">
     <div class="header-inner">
         <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0">
@@ -47,16 +51,17 @@
                                 @endif
                             @endauth
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
+                                <a class="nav-link @if (Str::endsWith($currentRouteName, 'welcome')) active @endif" aria-current="page"
                                     href="{{ route('welcome') }}">@lang('Home')</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page"
+                                <a class="nav-link @if (Str::endsWith($currentRouteName, 'contact')) active @endif" aria-current="page"
                                     href="{{ route('contact') }}">@lang('Contact us')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('faq') }}">FAQ</a>
+                                <a class="nav-link @if (Str::endsWith($currentRouteName, 'faq')) active @endif" aria-current="page"
+                                    href="{{ route('faq') }}">FAQ</a>
                             </li>
 
 
@@ -107,8 +112,7 @@
                                     </li>
                                     <li class="profile-link">
                                         @if (Auth()->user()->role_id == 2)
-                                            <a href=""{{ route('admin.users') }}
-                                                class="link-item">@lang('dashboard')</a>
+                                            <a href="{{ route('admin.users') }}" class="link-item">@lang('dashboard')</a>
                                         @endif
                                         <a href="{{ route('profile.edit') }}" class="link-item">Mon Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">

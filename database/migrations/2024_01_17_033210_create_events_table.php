@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('start_at')->nullable();
             $table->integer('duration')->nullable();
             $table->string('type');
+            $table->string('price')->default(1);
             $table->timestamps();
         });
     }

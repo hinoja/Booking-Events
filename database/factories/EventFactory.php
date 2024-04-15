@@ -26,6 +26,7 @@ class EventFactory extends Factory
             'user_id' => User::factory(),
             'category_id' => fake()->numberBetween(1, 20),
             'type' => fake()->numberBetween(1, 2),
+            'price' => fake()->numberBetween(1, 2),
             'description' => fake()->paragraph(32),
             'is_active' => fake()->boolean(68),
             'duration' => $number=fake()->numberBetween(1,6),

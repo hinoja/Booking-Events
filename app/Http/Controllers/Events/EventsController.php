@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Events;
 
 use App\Models\Event;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\EventRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller
 {
@@ -25,16 +28,23 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('front.events.add');
+        return view('front.events.add',
+            [
+                'categories' => Category::query()->latest()->get(),
+                // 'types' => Event::TYPES
+                'prices' => Event::PRICES
+
+            ]
+        );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        // dd        ($event);
-        $event = Event::find($id);
+
+        // $event = Event::find($id);
         return view('front.events.details', ['event' => $event]);
     }
 
@@ -67,11 +77,44 @@ class EventsController extends Controller
                     fn (Builder $query) => $query->where('category_id',  $request->category_id)
                 )
 
-                ->orderByDesc('created_at');
+                ->orderByDesc('created_at')
+                ->where('is_active', true);
+
             return view('front.events.index', [
                 'events' => $events->paginate(12),
                 'categories' => Category::query()->orderBy('name', 'asc')->get(),
             ]);
+        }
+    }
+    /**
+     * Store the specified resource in storage.
+     */
+    public function store(EventRequest $request)
+    {
+        // dd($request);
+        $event = Event::create([
+            'name' => $slug = $request->name,
+            'slug' => Str::slug($slug),
+            'place' => $request->place,
+            'duration' => $request->duration,
+            'type' => $request->type,
+            'date' => $request->date,
+            'user_id' => Auth::user()->id,
+            'start_at' => $request->start_at,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+        ]);
+        if (isset($request->image)) {
+            $filename_chemin = 'events/' . $event->id . '.' . $request->image->getClientOriginalExtension();
+
+            $filename = $event->id . '.' . $request->image->getClientOriginalExtension();
+            $event->image = $filename_chemin;
+            $event->save();
+
+            $request->file('image')->storeAs('events', $filename, 'public');
+            return redirect()->route('front.event.create')->with('success', "L'évènement   $event->name a bien été enregistré ! ");
+
+            // Toastr::success('You Have Successfully created your account :)', 'Success!!');
         }
     }
     /**

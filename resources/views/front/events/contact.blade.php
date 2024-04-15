@@ -1,4 +1,5 @@
 @extends('layout.front')
+@section('title',__('Contact us'))
 @section('content')
     <!-- Body Start-->
     <div class="wrapper">

@@ -13,7 +13,7 @@ class EventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,14 +25,13 @@ class EventRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:events,name|string|max:150',
-            // 'slug' => 'required|unique:events,slug|string',
             'place' => 'required|string|max:150',
             'duration' => 'required|numeric|min:0',
             'type' => 'required|' . Rule::in(array_keys(Event::TYPES)),
             'date' => 'required|date|after:' . now()->format('d-m-Y'),
             'start_at' => 'required',
-            'description' => 'required|string|max:1000',
-            // 'image' => 'required|image|mimes:png,jpg,jpeg|max:1024',
+            'description' => 'required|string|min:255',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:1024',
             'category_id' => 'required|exists:categories,id',
         ];
     }

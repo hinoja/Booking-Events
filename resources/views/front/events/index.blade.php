@@ -71,25 +71,27 @@
                                             data-ref="mixitup-target">
                                             <div class="main-card mt-4">
                                                 <div class="event-thumbnail">
-                                                    <a href="{{ route('front.event.show', $event->id) }}"
-                                                        class="thumbnail-img">
-                                                        <img src="images/event-imgs/img-1.jpg" alt="">
+                                                    <a href="{{ route('front.event.show', $event) }}" class="thumbnail-img">
+                                                        <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/big-2.jpg') }}"
+                                                            alt="">
                                                     </a>
                                                     <span class="bookmark-icon" title="Bookmark"></span>
                                                 </div>
                                                 <div class="event-content">
-                                                    <a href="{{ route('front.event.show', $event->id) }}"
-                                                        class="event-title">
+                                                    <a href="{{ route('front.event.show', $event) }}" class="event-title">
                                                         {{ $event->name }}</a>
                                                     <div class="duration-price-remaining">
-                                                        <span class="duration-price">AUD $100.00*</span>
+                                                        <span
+                                                            class="duration-price link-success">
+                                                            {{ $event->price== 1 ? 'GRATUIT' : 'PAYANT' }}
+                                                        </span>
                                                         <span class="remaining"></span>
                                                     </div>
                                                 </div>
                                                 <div class="event-footer">
                                                     <div class="event-timing">
                                                         <div class="publish-date">
-                                                            <span><i class="fa-solid fa-calendar-day me-2"></i>15
+                                                            <span><i class="fa-solid fa-calendar-day me-2"></i>
                                                                 {{ $event->FormatDate($event->date) }}</span>
                                                             <span class="dot"><i class="fa-solid fa-circle"></i></span>
                                                             <span>{{ $event->start_at }}</span>

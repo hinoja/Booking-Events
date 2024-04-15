@@ -16,10 +16,15 @@ class Event extends Model
         1 => 'an Online Event',
         2 => 'an Venue Event',
     ];
+    const PRICES = [
+        1 => 'GRATUIT',
+        2 => 'PAYANT',
+    ];
+
 
 
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'place','category_id', 'description', 'is_active', 'type', 'date', 'start_at', 'duration'];
+    protected $fillable = ['name', 'slug', 'place','category_id','user_id','description', 'is_active', 'type', 'date', 'start_at', 'duration'];
     public function user():BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

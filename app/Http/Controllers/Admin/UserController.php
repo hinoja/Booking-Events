@@ -16,9 +16,11 @@ class UserController extends Controller
         $users = User::query()
             ->with('role')
             ->with('events')
-            ->latest()->get(); 
+            ->latest()->get();
+        $count = User::count();
 
-        return view('admin.users', compact('users'));
+
+        return view('admin.users', ['users'=>$users,'count'=>$count]);
     }
     /**
      * Show the form for creating a new resource.
@@ -52,19 +54,35 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
+     /**
+     * Enable or disable user account
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    // public function updateStatus(UpdateUserStatus $updateUserStatus, User $user): RedirectResponse
+    // {
+    //     if (! $user->is_active && ($user->disabled_by !== auth()->id()) && $user->disabled_at) {
+    //         toast(__('You cannot enable this account because it was disabled by its owner.'), 'info');
+    //         return back();
+    //     }
+
+    //     $updateUserStatus->handle($user);
+
+    //     $message = match (intval($user->is_active)) {
+    //         1 => __('Account has been successfully unblocked.'),
+    //         0 => __('Account has been successfully blocked.'),
+    //     };
+
+    //     toast($message, 'success');
+
+    //     return back();
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', "L'utilisateur a bien été supprimé");
     }
 }
