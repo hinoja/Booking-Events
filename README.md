@@ -1,5 +1,6 @@
 ### Bookings Events
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/logo.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -9,6 +10,7 @@
 </p>
 
 ## About Project
+
 L'organisation d'événements est une activité en pleine croissance, tant en termes de nombre
 d'événements organisés que de participation. Les plateformes de réservation d'événements
 constituent un outil incontournable pour les organisateurs d'événements et les participants. Elles
@@ -18,12 +20,14 @@ facilement des événements qui correspondent à leurs intérêts et de réserve
 
 ## Objectifs Project
 
-- Mettre en place une plateforme conviviale pour les organisateurs d'événements.
-- Permettre aux participants de s'inscrire facilement et de choisir leurs options.
-- Configurer un pipeline de déploiement continu pour garantir des mises à jour rapides.
-- Simplifier et automatiser la gestion des événements pour les organisateurs
-- Faciliter la recherche et la réservation d'événements pour les participants 
+-   Mettre en place une plateforme conviviale pour les organisateurs d'événements.
+-   Permettre aux participants de s'inscrire facilement et de choisir leurs options.
+-   Configurer un pipeline de déploiement continu pour garantir des mises à jour rapides.
+-   Simplifier et automatiser la gestion des événements pour les organisateurs
+-   Faciliter la recherche et la réservation d'événements pour les participants
 
- 
-## To deploy with  AWS services
- 
+## Quelques Captures
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="details.PNG" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="welcome.PNG" width="400" alt="Laravel Logo"></a></p>
+
+## To deploy with AWS services
