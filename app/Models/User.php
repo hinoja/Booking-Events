@@ -3,13 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Role;
-use App\Models\Event;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -43,6 +41,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -63,15 +62,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
     /**
      * Check if disabled account can login
-     *
-     * @return bool
-     *
      */
     public function canLogin(): bool
     {
-        return $this->is_active || (!$this->is_active && $this->disabled_by === $this->id);
+        return $this->is_active || (! $this->is_active && $this->disabled_by === $this->id);
     }
 }

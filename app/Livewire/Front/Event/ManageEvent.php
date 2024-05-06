@@ -9,11 +9,13 @@ use Livewire\WithPagination;
 class ManageEvent extends Component
 {
     protected $paginationTheme = 'bootstrap';
+
     use WithPagination;
 
     public function render()
     {
-        $events=Event::latest()->where('is_active',true)->paginate(10);
-        return view('livewire.front.event.manage-event', ['events'=>$events]);
+        $events = Event::latest()->where('is_active', true)->paginate(10);
+
+        return view('livewire.front.event.manage-event', ['events' => $events]);
     }
 }

@@ -2,19 +2,40 @@
 
 namespace App\Livewire\Front\Event;
 
-use App\Models\Event;
-use Livewire\Component;
-use App\Models\Category;
-use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 use App\Http\Requests\EventRequest;
+use App\Models\Category;
+use App\Models\Event;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Add extends Component
 {
     use WithFileUploads;
+
     // #[Validate('required|min:3')]
-    public  $types, $type, $name, $image, $slug, $place, $description, $category_id,  $date, $start_at, $duration;
+    public $types;
+
+    public $type;
+
+    public $name;
+
+    public $image;
+
+    public $slug;
+
+    public $place;
+
+    public $description;
+
+    public $category_id;
+
+    public $date;
+
+    public $start_at;
+
+    public $duration;
+
     //public $name, $image, $types, $description,$slug;
     public $step = 0;
 
@@ -34,6 +55,7 @@ class Add extends Component
         $this->step = 0;
         $this->types = Event::TYPES;
     }
+
     public function next()
     {
 
@@ -41,13 +63,14 @@ class Add extends Component
         // dd($data);
         $this->step++;
     }
+
     public function previous()
     {
         $this->step--;
     }
+
     public function submit1()
     {
-
 
         $this->step++;
     }

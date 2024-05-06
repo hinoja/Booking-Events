@@ -201,7 +201,7 @@ return [
 
     'custom-values' => [
         'field' => [
-            'value' => 'custom-value'
+            'value' => 'custom-value',
         ],
     ],
 ];

@@ -63,7 +63,7 @@
                                     <button type="button" class="control" data-filter=".sports">Sports</button>
                                     <button type="button" class="control" data-filter=".free">Free</button>
                                 </div>
-                                {{-- @livewire('front.event.manage-event') --}}
+
                                 {{-- The whole world belongs to you. --}}
                                 <div class="row" data-ref="event-filter-content">
                                     @foreach ($events as $event)
@@ -72,20 +72,24 @@
                                             <div class="main-card mt-4">
                                                 <div class="event-thumbnail">
                                                     <a href="{{ route('front.event.show', $event) }}" class="thumbnail-img">
-                                                        <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/big-2.jpg') }}"
+                                                        <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/img-1.jpg') }}"
                                                             alt="">
                                                     </a>
                                                     <span class="bookmark-icon" title="Bookmark"></span>
+
                                                 </div>
                                                 <div class="event-content">
                                                     <a href="{{ route('front.event.show', $event) }}" class="event-title">
                                                         {{ $event->name }}</a>
                                                     <div class="duration-price-remaining">
-                                                        <span
-                                                            class="duration-price link-success">
-                                                            {{ $event->price== 1 ? 'GRATUIT' : 'PAYANT' }}
+                                                        <span class="duration-price link-success">
+                                                            {{ $event->tickets->last()->price > 0 ? 'PAYANT' : 'GRATUIT' }}
                                                         </span>
-                                                        <span class="remaining"></span>
+                                                        <span class="remaining">
+                                                            @if (now() > $event->date)
+                                                                <small class="badge rounded-pill bg-danger"> Daté</small>
+                                                            @endif
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="event-footer">

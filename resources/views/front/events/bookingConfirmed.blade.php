@@ -10,8 +10,10 @@
                         <div class="barren-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Booking Confirmed</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('front.event.show', $event) }}">Détails</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">Confirmation de la réservation
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -29,38 +31,35 @@
                                     <div class="booking-confirmed-img mt-4">
                                         <img src="{{ asset('images/confirmed.png') }}" alt="">
                                     </div>
-                                    <h4>Booking Confirmed</h4>
-                                    <p class="ps-lg-4 pe-lg-4">We are pleased to inform you that your reservation request
-                                        has been received and confirmed.</p>
-                                    <div class="add-calender-booking">
-                                        <h5>Add</h5>
-                                        <a href="#" class="cb-icon"><i class="fa-brands fa-windows"></i></a>
-                                        <a href="#" class="cb-icon"><i class="fa-brands fa-apple"></i></a>
-                                        <a href="#" class="cb-icon"><i class="fa-brands fa-google"></i></a>
-                                        <a href="#" class="cb-icon"><i class="fa-brands fa-yahoo"></i></a>
-                                    </div>
+                                    <h4>Reservation Confirmée</h4>
+                                    <p class="ps-lg-4 pe-lg-4">Nous avons le plaisir de vous annoncer que votre requête de
+                                        réservation a été reçu et confirmée.</p>
+
                                 </div>
                                 <div class="booking-confirmed-bottom">
                                     <div class="booking-confirmed-bottom-bg p_30">
                                         <div class="event-order-dt">
                                             <div class="event-thumbnail-img">
-                                                <img src="{{ asset('images/blog-imgs/img-7.jpg') }}" alt="">
+                                                <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/img-1.jpg') }}"
+                                                    alt="">
+
                                             </div>
                                             <div class="event-order-dt-content">
-                                                <h5>Tutorial on Canvas Painting for Beginners</h5>
-                                                <span>Wed, Jun 01, 2022 5:30 AM. Duration 1h</span>
-                                                <div class="buyer-name">John Doe</div>
+                                                <h5>{{ $event->name }}</h5>
+                                                <span>{{ $event->formatDate($event->date) }} à {{ $event->start_at }} .
+                                                    Durée {{ $event->duration }}h</span>
+                                                <div class="buyer-name">{{ Auth::user()->name }}</div>
                                                 <div class="booking-total-tickets">
                                                     <i class="fa-solid fa-ticket rotate-icon"></i>
                                                     <span class="booking-count-tickets mx-2">1</span>x Ticket
                                                 </div>
                                                 <div class="booking-total-grand">
-                                                    Total : <span>$75.00</span>
+                                                    Total : <span>{{ $event->tickets->last()->price }}</span> XAF
                                                 </div>
                                             </div>
                                         </div>
                                         <a href="invoice.html" class="main-btn btn-hover h_50 w-100 mt-5"><i
-                                                class="fa-solid fa-ticket rotate-icon me-3"></i>View Ticket</a>
+                                                class="fa-solid fa-ticket rotate-icon me-3"></i>Voir le Ticket</a>
                                     </div>
                                 </div>
                             </div>

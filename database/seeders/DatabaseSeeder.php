@@ -4,12 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\User;
 use App\Models\Event;
-use App\Models\Category;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Database\Seeders\RoleSeeder;
-use Database\Seeders\CategorySeeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -34,7 +32,9 @@ class DatabaseSeeder extends Seeder
         // Event::factory(20)->create();
 
         User::factory(10)->has(
-            Event::factory(rand(1, 5))
+            Event::factory(rand(1, 5))->has(
+                Ticket::factory()
+            )
         )->create();
 
     }

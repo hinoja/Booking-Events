@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -19,9 +19,9 @@ class UserController extends Controller
             ->latest()->get();
         $count = User::count();
 
-
-        return view('admin.users', ['users'=>$users,'count'=>$count]);
+        return view('admin.users', ['users' => $users, 'count' => $count]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -54,7 +54,7 @@ class UserController extends Controller
         //
     }
 
-     /**
+    /**
      * Enable or disable user account
      */
     // public function updateStatus(UpdateUserStatus $updateUserStatus, User $user): RedirectResponse

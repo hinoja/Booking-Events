@@ -1,3 +1,4 @@
+
 @php
     use Brian2694\Toastr\Facades\Toastr;
 @endphp
@@ -13,6 +14,11 @@
 </head>
 
 <body>
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <div class="form-wrapper">
         <div class="app-form">
             <div class="app-form-sidebar">

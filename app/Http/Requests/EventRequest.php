@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Event;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EventRequest extends FormRequest
 {
@@ -27,8 +27,8 @@ class EventRequest extends FormRequest
             'name' => 'required|unique:events,name|string|max:150',
             'place' => 'required|string|max:150',
             'duration' => 'required|numeric|min:0',
-            'type' => 'required|' . Rule::in(array_keys(Event::TYPES)),
-            'date' => 'required|date|after:' . now()->format('d-m-Y'),
+            'type' => 'required|'.Rule::in(array_keys(Event::PRICES)),
+            'date' => 'required|date|after:'.now()->format('d-m-Y'),
             'start_at' => 'required',
             'description' => 'required|string|min:255',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:1024',

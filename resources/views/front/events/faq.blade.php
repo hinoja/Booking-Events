@@ -24,8 +24,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="main-title checkout-title text-center">
-                            <h3>Frequently asked questions</h3>
-                            <p class="mb-0">Find answers to the common questions asked about Barren.</p>
+                            <h3>Questions fréquemment poséess</h3>
+                            <p class="mb-0">Trouvez les réponses aux questions les plus fréquemment posées sur Barren.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
@@ -35,12 +35,12 @@
                             </div>
                             <div class="bp-content faq-widget-content">
                                 <ul class="faq-widget-links pt_30">
-                                    <li><a href="#FAQforOrganisers">FAQ for Organisers</a></li>
-                                    <li><a href="#FAQforAttendees">FAQ for Attendees</a></li>
+                                    <li><a href="#FAQforOrganisers">FAQ pour les organisateurs</a></li>
+                                    <li><a href="#FAQforAttendees">FAQ pour les participants</a></li>
                                 </ul>
                                 <div class="cant-ans-box pt_30">
-                                    <h4><i class="fa-solid fa-circle-question me-2 fs-18"></i>Can't find an answer?</h4>
-                                    <a href="help_center.html">Visit Help Center</a>
+                                    <h4><i class="fa-solid fa-circle-question me-2 fs-18"></i>Vous n'avez pas trouvé de réponse ?</h4>
+                                    <a href="help_center.html">Visitez le Centre d'aide</a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="faq-scrollspy">
                             <div class="faq-accordion pt-0 p-2 mt-5" id="FAQforOrganisers">
                                 <div class="faq-accordion-title">
-                                    <h4>FAQ for Organisers</h4>
+                                    <h4>FAQ pour les organisateurs</h4>
                                 </div>
                                 <div class="accordion" id="accordionFAQforOrganisers">
                                     <div class="accordion-item">
@@ -57,21 +57,16 @@
                                             <button class="accordion-btn pe-0 ps-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsOrgnaisersOpen-collapse1" aria-expanded="true"
                                                 aria-controls="panelsOrgnaisersOpen-collapse1">
-                                                What types of events can I set up through Barren?
+                                                Quels types d'événements puis-je organiser par l'intermédiaire de Barren ?
                                             </button>
                                         </h2>
                                         <div id="panelsOrgnaisersOpen-collapse1" class="accordion-collapse collapse show"
                                             aria-labelledby="panelsOrgnaisersOpen-heading1"
                                             data-bs-parent="#accordionFAQforOrganisers">
                                             <div class="accordion-body pt-0 pe-0 ps-0">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis
-                                                    auctor ex. Curabitur id odio in lectus molestie porttitor ac vel turpis.
-                                                    Integer tincidunt non felis et tincidunt. Duis eros leo, porta a felis
-                                                    vitae, facilisis blandit felis. Cras auctor nisl ut sem bibendum, non
-                                                    auctor magna ultrices. Etiam condimentum enim eu dui pharetra, eu
-                                                    sagittis ante mollis. Integer porttitor ultricies bibendum. Aenean
-                                                    mollis odio id ultrices pharetra. Quisque vitae mi nec enim viverra
-                                                    pellentesque.</p>
+                                                <p>La clé est de choisir un type (Conférences et ateliers,Evénements professionnels,Événements sociaux et de divertissement,Mariages et anniversaires,Et bien plus encore)d'événement qui correspond à vos intérêts, à votre public cible et à vos objectifs. Une fois que vous avez une idée, une plateforme de réservation d'événements peut vous fournir les outils et les ressources nécessaires pour faire de votre événement un succès.
+
+                                                    N'oubliez pas que ce ne sont que quelques exemples, et les possibilités sont infinies. Avec une plateforme de réservation d'événements à vos côtés, vous pouvez donner vie à toute vision d'événement.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -98,35 +93,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsOrgnaisersOpen-heading3">
-                                            <button class="accordion-btn pe-0 ps-0 collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#panelsOrgnaisersOpen-collapse3"
-                                                aria-expanded="false" aria-controls="panelsOrgnaisersOpen-collapse3">
-                                                Can my event’s page and my profile reflect my company’s branding?
-                                            </button>
-                                        </h2>
-                                        <div id="panelsOrgnaisersOpen-collapse3" class="accordion-collapse collapse"
-                                            aria-labelledby="panelsOrgnaisersOpen-heading3"
-                                            data-bs-parent="#accordionFAQforOrganisers">
-                                            <div class="accordion-body pt-0 pe-0 ps-0">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis
-                                                    auctor ex. Curabitur id odio in lectus molestie porttitor ac vel turpis.
-                                                    Integer tincidunt non felis et tincidunt. Duis eros leo, porta a felis
-                                                    vitae, facilisis blandit felis. Cras auctor nisl ut sem bibendum, non
-                                                    auctor magna ultrices. Etiam condimentum enim eu dui pharetra, eu
-                                                    sagittis ante mollis. Integer porttitor ultricies bibendum. Aenean
-                                                    mollis odio id ultrices pharetra. Quisque vitae mi nec enim viverra
-                                                    pellentesque.</p>
-                                            </div>
-                                        </div>
+   
                                     </div>
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsOrgnaisersOpen-heading4">
                                             <button class="accordion-btn pe-0 ps-0 collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#panelsOrgnaisersOpen-collapse4"
                                                 aria-expanded="false" aria-controls="panelsOrgnaisersOpen-collapse4">
-                                                How soon you after my event should I expect to get paid?
+                                                Combien de temps après l'événement dois-je m'attendre à être payé ?
                                             </button>
                                         </h2>
                                         <div id="panelsOrgnaisersOpen-collapse4" class="accordion-collapse collapse"

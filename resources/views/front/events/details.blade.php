@@ -1,4 +1,5 @@
 @php
+    use Illuminate\Support\Facades\DB;
     use Carbon\Carbon;
 @endphp
 @extends('layout.front')
@@ -31,7 +32,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-top-dts">
                             <div class="event-top-date">
-                                <span class="event-month"> {{ $event->price == 1 ? 'GRATUIT' : 'PAYANT' }}
+                                <span class="event-month"> {{ $event->tickets->last()->price > 0 ? 'PAYANT' : 'GRATUIT' }}
 
                                     {{-- {{ ($event->formatDate(Carbon::parse($event->date)->format('m'))) }} --}}
                                     {{-- {{ ( (Carbon::parse($event->date->format('d')))->translatedFormat('d M Y'))  }} --}}
@@ -39,7 +40,10 @@
                                 <span class="event-date">{{ Carbon::parse($event->date)->format('d') }}</span>
                             </div>
                             <div class="event-top-dt">
-                                <h3 class="event-main-title">{{ $event->name }}</h3>
+                                <h3 class="event-main-title">{{ $event->name }} @if (now() > $event->date)
+                                        <small class="badge rounded-pill bg-danger"> Daté</small>
+                                    @endif
+                                </h3>
                                 <div class="event-top-info-status">
                                     <span class="event-type-name"><i
                                             class="fa-solid fa-location-dot"></i>{{ $event->place }}</span>
@@ -55,24 +59,14 @@
                     <div class="col-xl-8 col-lg-7 col-md-12">
                         <div class="main-event-dt">
                             <div class="event-img">
-                                <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/big-2.jpg') }}"
-                                    alt="">
+                                <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/img-1.jpg') }}"
+                                    height="500px" alt="">
                             </div>
                             <div class="share-save-btns dropdown">
-                                <button class="sv-btn" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                        class="fa-solid fa-share-nodes me-2"></i>Partager</button>
+                                {{-- <button class="sv-btn" data-bs-toggle="dropdown" aria-expanded="false"> </button> --}}
                                 Categorie <button class="btn btn-outline-warning" class="sv-btn me-2">
                                     {{ $event->category->name }}</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="fa-brands fa-facebook me-3"></i>Facebook</a></li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="fa-brands fa-twitter me-3"></i>Twitter</a></li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="fa-brands fa-linkedin-in me-3"></i>LinkedIn</a></li>
-                                    <li><a class="dropdown-item" href="#"><i
-                                                class="fa-regular fa-envelope me-3"></i>Email</a></li>
-                                </ul>
+
                             </div>
                             <div class="main-event-content">
                                 <h4>A propos de cet évènement</h4>
@@ -89,8 +83,12 @@
                             <div class="time-left">
                                 <div class="countdown">
                                     <div class="countdown-item">
-                                        {{-- {{   Carbon::parse($event->date) - Carbon::parse(now()) }} --}}
-                                        <span id="day"></span>Jours
+
+                                        <span id="day"> 155</span>Jours
+                                        {{-- <span id="day"> {{ (int)  (strtotime($event->date) - strtotime(now()) )}}</span>Jours --}}
+                                        {{--  <span>
+                                             {{ Carbon::parse(date('Y-m-d'), strtotime($event->date)) - Carbon::parse(date('Y-m-d'), strtotime(now())) }}</span>Jours --}}
+
                                     </div>
                                     <div class="countdown-item">
                                         <span id="hour"></span>Heure
@@ -110,7 +108,7 @@
                                 <div class="event-dt-right-content">
                                     <h4>Organisé par</h4>
                                     <h5>{{ $event->user->name }}</h5>
-                                    <a href="attendee_profile_view.html">Voir Profile</a>
+                                    <a href="#">Voir Profile</a>
                                 </div>
                             </div>
                             <div class="event-dt-right-group">
@@ -147,34 +145,81 @@
                                     <a href="#"><i class="fa-solid fa-location-dot me-2"></i>Voir la Carte</a>
                                 </div>
                             </div>
+
+                            {{-- @if (auth()->user()->role->id == 3) --}}
                             @auth
                                 @if (auth()->user()->role->id == 3)
-                                    <div class="select-tickets-block">
-                                        <h6>Selectionnez les Tickets</h6>
-                                        <div class="select-ticket-action">
-                                            <div class="ticket-price">AUD $75.00</div>
-                                            <div class="quantity">
-                                                <div class="counter">
-                                                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
-                                                    <input type="text" value="0">
-                                                    <span class="up" onClick='increaseCount(event, this)'>+</span>
+                                    @if ($event->tickets->last()->price > 0)
+                                        <div class="select-tickets-block">
+                                            <h6>Selectionnez les Tickets</h6>
+                                            <div class="select-ticket-action">
+                                                <div class="ticket-price">
+                                                    {{ $event->tickets->last()->price ? $event->tickets->last()->price : 0 }}
+                                                    XAF
+                                                </div>
+                                                <div class="quantity">
+                                                    <div class="counter">
+                                                        <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                                                        <input type="text" value="0">
+                                                        <span class="up" onClick='increaseCount(event, this)'>+</span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <p>2 x pair hand painted leather earrings 1 x glass of bubbles / or coffee
+                                                Individual
+                                                grazing box / fruit cup</p>
+                                            <div class="xtotel-tickets-count">
+                                                <div class="x-title">1x Ticket(s)</div>
+                                                <h4>AUD <span>$0.00</span></h4>
+                                            </div>
+                                            {{-- <div class="booking-btn">
+                                                @if (now() > $event->date)
+                                                    <small class="badge rounded-pill bg-danger"> Daté</small>
+                                                    <button style="background: red" class="main-btn btn-hover w-100"> Cet
+                                                        évènement est déjà passé </button>
+                                                @else
+                                                    <a href="{{ route('stripe.view') }}"
+                                                        class="main-btn btn-hover w-100">Réserver
+                                                        Maintenant </a>
+                                                @endif
+                                            </div> --}}
                                         </div>
-                                        <p>2 x pair hand painted leather earrings 1 x glass of bubbles / or coffee Individual
-                                            grazing box / fruit cup</p>
-                                        <div class="xtotel-tickets-count">
-                                            <div class="x-title">1x Ticket(s)</div>
-                                            <h4>AUD <span>$0.00</span></h4>
+                                    @else
+                                        <div class="select-tickets-block">
+                                            <div class="xtotel-tickets-count">
+                                                <h4>PRIX : <span class="text-success">0 XAF</span> </h4>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
+                                @endif
+                            @endauth
+                            <div class="booking-btn">
+
+
+                                @if (now() < $event->date && count(DB::table('booking_event')->where('event_id', $event->id)->where('user_id', Auth::user()->id)->get()) > 0)
+                                    <a href="#" style="background: green" class="main-btn btn-hover w-10 0 "> Vous
+                                        avez déjà une réservation en cours... </a>
+                                    {{-- class="main-btn btn-hover w-10 0 ">Annuler Votre Réservation</a> --}}
+                                @elseif(now() < $event->date && count(DB::table('booking_event')->where('event_id', $event->id)->where('user_id', Auth::user()->id)->get()) == 0 )
+                                    <a href="{{ route('front.booking.event', $event) }}"
+                                        class="main-btn btn-hover w-100 ">Réserver
+                                        Maintenant </a>
+                                        @elseif(now() > $event->date && count(DB::table('booking_event')->where('event_id', $event->id)->where('user_id', Auth::user()->id)->get()) >0 )
+                                       <strong class="text-warning"> Nous esperons que vous avez assisté à l'évènement qui s'est déroulé le {{ $event->formatDate($event->date)  }}</strong>
+                                        {{-- <button
+                                            class="main-btn btn-hover w-100 "> qui s'est déroulé le {{ $event->formatDate($event->date)  }}</button> --}}
+                                @endif
+                            </div>
+                            {{-- @auth
+                                @if (auth()->user()->role->id == 3)
                                     <div class="booking-btn">
-                                        <a href="{{ route('bookingConfirmed') }}" class="main-btn btn-hover w-100">Réserver
+
+                                        <a href="#"
+                                            class="main-btn btn-hover w-100">Réserver
                                             Maintenant </a>
                                     </div>
                                 @endif
-                            @endauth
-
+                            @endauth --}}
                         </div>
                     </div>
                     @livewire('front.event.manage-event')

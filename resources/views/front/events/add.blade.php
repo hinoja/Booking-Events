@@ -57,7 +57,7 @@
                                                                         nom apparaitra sur la page de l'événement et la
                                                                         liste de tous les endroits où le nom de votre
                                                                         événement sera utilisé. </p>
-                                                                    <input
+                                                                    <input required
                                                                         class="form-control h_50  @error('name') is-invalid @enderror"
                                                                         id="name" type="text" name="name"
                                                                         value="{{ old('name') }}"
@@ -76,7 +76,7 @@
                                                                         visibilité de votre événement. votre événement.
 
                                                                     </p>
-                                                                    <select id="category_id" name="category_id"
+                                                                    <select required id="category_id" name="category_id"
                                                                         class=" selectpicker @error('category_id') is-invalid @enderror"
                                                                         data-size="5" title="Select category"
                                                                         data-live-search="true">
@@ -103,7 +103,7 @@
                                                                             <label class="form-label mt-3 fs-6">Event
                                                                                 Date.*</label>
                                                                             <div class="loc-group position-relative">
-                                                                                <input type="date" wire:model="date"
+                                                                                <input type="date" required
                                                                                     name="date"
                                                                                     value="{{ old('date') }}"
                                                                                     class="form-control h_50 "
@@ -127,7 +127,7 @@
                                                                                             <input type="time"
                                                                                                 id="time"
                                                                                                 value="{{ old('start_at') }}"
-                                                                                                name="start_at"
+                                                                                                required name="start_at"
                                                                                                 class="form-control h_50"
                                                                                                 data-language="fr"
                                                                                                 placeholder="H:m:s">
@@ -145,7 +145,7 @@
                                                                                         class="form-label mt-3 fs-6">Duration</label>
                                                                                     <div
                                                                                         class="loc-group position-relative">
-                                                                                        <input type="number"
+                                                                                        <input type="number" required
                                                                                             value="{{ old('duration') }}"
                                                                                             name="duration" min="0"
                                                                                             max="10"
@@ -178,7 +178,8 @@
                                                                         <div class="">
                                                                             <div class="loc-group position-relative">
                                                                                 <input type="file" class="form-control"
-                                                                                    name="image" id="image" value="{{ old('image') }}"
+                                                                                    required name="image" id="image"
+                                                                                    value="{{ old('image') }}"
                                                                                     placeholder=" Ajouter une image">
                                                                             </div>
 
@@ -198,7 +199,7 @@
                                                                         special instructions required to attend your event.
                                                                     </p>
                                                                     <div class="text-editor mt-4">
-                                                                        <textarea id="pd_editor" name="description"> </textarea>
+                                                                        <textarea required id="pd_editor" name="description"> </textarea>
                                                                     </div>
                                                                     @error('description')
                                                                         <span
@@ -215,27 +216,71 @@
                                                                     <p class="mt-2 d-block fs-14 mb-3">Le choix de
                                                                         catégories pertinentes permet d'améliorer la
                                                                         visibilité de votre événement. votre événement.
-
                                                                     </p>
-                                                                    <select name="type" id="type"
-                                                                        class=" selectpicker @error('type') is-invalid @enderror"
-                                                                        title="Selectionner le type d'Evènement"
-                                                                        data-live-search="true">
-                                                                        <option hidden>@lang('Select the job type')<b
-                                                                                class="text-danger">*</b></option>
-                                                                        {{-- @foreach ($types as $key => $type)
-                                                                            <option value="{{ $key }}">
-                                                                                {{ __($type) }}</option>
-                                                                        @endforeach --}}
-                                                                        @foreach ($prices as $key => $price)
-                                                                            <option value="{{ $key }}">
-                                                                                {{ __($price) }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    @error('type')
-                                                                        <span
-                                                                            class="text-danger d-flex justify-content-start"><small>{{ $message }}</small></span>
-                                                                    @enderror
+                                                                    <div class="row g-4">
+                                                                        <div class="col-md-6 mr-4">
+                                                                            <label class="form-label mt-3 fs-6"> le nombre
+                                                                                de tickets </label>
+                                                                            <div class="loc-group position-relative">
+                                                                                <select name="type" id="type"
+                                                                                    class=" selectpicker @error('type') is-invalid @enderror"
+                                                                                    title="Selectionner le type d'Evènement"
+                                                                                    data-live-search="true">
+                                                                                    <option hidden>@lang('Select the job type')<b
+                                                                                            class="text-danger">*</b>
+                                                                                    </option>
+                                                                                    {{-- @foreach ($types as $key => $type)
+                                                                                    <option value="{{ $key }}">
+                                                                                        {{ __($type) }}</option>
+                                                                                @endforeach --}}
+                                                                                    @foreach ($prices as $key => $price)
+                                                                                        <option
+                                                                                            value="{{ $key }}">
+                                                                                            {{ __($price) }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
+
+                                                                            </div>
+                                                                            <span> @error('type')
+                                                                                    <span
+                                                                                        class="text-danger d-flex justify-content-start"><small>{{ $message }}</small></span>
+                                                                                @enderror
+
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <label class="form-label mt-3 fs-6"> Le nombre
+                                                                                de Ticket</label>
+                                                                            <div class="loc-group position-relative">
+                                                                                <input type="number" min="5"
+                                                                                    name="number"
+                                                                                    value="{{ old('number') }}"
+                                                                                    class="form-control h_50 "
+                                                                                    id="date" data-language="fr"
+                                                                                    placeholder="Ne rien saisir = Illimité">
+                                                                            </div>
+                                                                            <span><x-input-error :messages="$errors->get('number')"
+                                                                                    class="mt-2" /></span>
+
+                                                                        </div>
+                                                                        <div class="col-md-2" id="price">
+                                                                            <label class="form-label mt-3 fs-6"> Le Prix du
+                                                                                ticket</label>
+                                                                            <div class="loc-group position-relative">
+                                                                                <input type="number" min="100"
+                                                                                    name="price"
+                                                                                    value="{{ old('price') }}"
+                                                                                    class="form-control h_50 "
+                                                                                    id="date" data-language="fr"
+                                                                                    placeholder="5000">
+                                                                            </div>
+                                                                            <span><x-input-error :messages="$errors->get('price')"
+                                                                                    class="mt-2" /></span>
+
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="form-group pt_30 pb-2">
                                                                     <label class="form-label fs-16">Where is your event
@@ -244,11 +289,11 @@
                                                                         your
                                                                         event to tell your attendees where to join the
                                                                         event.</p>
-                                                                    <input
+                                                                    <input required
                                                                         class="form-control h_50 @error('place') is-invalid @enderror"
                                                                         id="place" type="text" name="place"
                                                                         placeholder="Entrez le lieu/lien de l'évènement ici ..."
-                                                                        value="{{ old('place') }}"  >
+                                                                        value="{{ old('place') }}">
                                                                     <span><x-input-error :messages="$errors->get('name')"
                                                                             class="mt-2" /></span>
                                                                 </div>
@@ -289,7 +334,21 @@
     <script src="{{ asset('js/jquery-steps.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/i18n/datepicker.en.js') }}"></script>
+    <script>
+        $('document').ready(function() {
 
+
+            $('#type').change(function() {
+                var data = $(this).val();
+                if (data == "1") {
+                    $('#price').hide();
+                }
+                if (data == "2") {
+                    $('#price').show();
+                }
+            })
+        })
+    </script>
     <script>
         ClassicEditor
             .create(document.querySelector('#pd_editor'), {

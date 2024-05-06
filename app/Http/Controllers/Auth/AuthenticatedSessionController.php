@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -51,20 +51,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $auth = auth()->user();
-        Toastr::success('Hello Dear '.Auth::user()->name.' :)', 'Success!!');
-        if ($auth->role_id === 1) //admin
-        {
+
+        if ($request->user()->role_id === 1) { //admin
             // $redirect = 'admin/dashboard';
-            $redirect = '/';
-        } elseif ($auth->role_id === 2) //organisator
-        {
-            $redirect = '/profile';
+            $redirect =  'admin.users';
         } else {
-            $redirect = '/';
+            $redirect = 'profile.edit';
         }
 
-        return redirect()->intended($redirect);
+        Toastr()->success('Hello Dear ' . Auth::user()->name . ':)');
+
+        return redirect()->route($redirect);
+
+        // return redirect()->intended($redirect);
     }
 
     /**

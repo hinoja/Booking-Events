@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Events;
 
+use App\Models\User;
 use App\Models\Event;
+use App\Models\Ticket;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Notification;
 
 class EventsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +26,8 @@ class EventsController extends Controller
     {
         $events = Event::latest()->with(['user'])->where('is_active', true)->paginate(12);
 
-        return view('front.events.index', ['events' => $events, 'categories' => Category::query()->latest()->get()]);
+        return view('front.events.index', ['events' => $events,
+                                                     'categories' => Category::query()->latest()->get()]);
     }
 
     /**
@@ -28,13 +35,11 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('front.events.add',
-            [
-                'categories' => Category::query()->latest()->get(),
-                // 'types' => Event::TYPES
-                'prices' => Event::PRICES
-
-            ]
+        return view(
+            'front.events.add',[ 'categories' => Category::query()->latest()->get(),
+                                            // 'types' => Event::TYPES
+                                            'prices' => Event::PRICES,
+                                        ]
         );
     }
 
@@ -58,9 +63,10 @@ class EventsController extends Controller
 
         if (!$request->search && !$categorie) {
             $events = Event::query()->latest()
-                ->where('is_active', true)
-                ->with(['category'])
-                ->paginate(12);
+                            ->where('is_active', true)
+                            ->with(['category'])
+                            ->paginate(12);
+
             return view('front.events.index', [
                 'events' => $events,
                 'categories' => Category::query()->orderBy('name', 'asc')->get(),
@@ -74,7 +80,7 @@ class EventsController extends Controller
                 )
                 ->when(
                     $request->category_id,
-                    fn (Builder $query) => $query->where('category_id',  $request->category_id)
+                    fn (Builder $query) => $query->where('category_id', $request->category_id)
                 )
 
                 ->orderByDesc('created_at')
@@ -86,10 +92,11 @@ class EventsController extends Controller
             ]);
         }
     }
+
     /**
      * Store the specified resource in storage.
      */
-    public function store(EventRequest $request)
+    public function store(EventRequest $request, TicketRequest $request2)
     {
         // dd($request);
         $event = Event::create([
@@ -112,11 +119,26 @@ class EventsController extends Controller
             $event->save();
 
             $request->file('image')->storeAs('events', $filename, 'public');
-            return redirect()->route('front.event.create')->with('success', "L'évènement   $event->name a bien été enregistré ! ");
-
-            // Toastr::success('You Have Successfully created your account :)', 'Success!!');
         }
+
+        $ticket = Ticket::create([
+            'event_id' => $event->id,
+            'price' => $request2->price ? $request2->price : 0,
+            'number' => $request2->number ? $request2->number : 1,
+        ]);
+
+        // Notification::send(Auth::user(),);
+
+
+        Toastr()->success("L'évènement   $event->name a bien été enregistré ! :)");
+
+        return redirect()->route('front.event.create');
+        // ->with('success', "L'évènement   $event->name a bien été enregistré ! ");
+
+        // Toastr::success('You Have Successfully created your account :)', 'Success!!');
+
     }
+
     /**
      * Update the specified resource in storage.
      */

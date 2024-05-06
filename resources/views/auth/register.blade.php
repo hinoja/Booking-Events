@@ -46,7 +46,7 @@
                             <div class="form-group mt-4">
                                 <label class="form-label mt-3 fs-6"> Selectionnez le type de compte *</label>
 
-                                <select class=" form-control selectpicker" name="role_id" id="password">
+                                <select class="l selectpicker" name="role_id" id="password">
                                     {{-- <option hidden> Selectionnez le type de compte<b class="text-danger">*</b></option> --}}
                                     @foreach ($roles as $role)
                                         @if ($role->id != 1)
@@ -89,7 +89,7 @@
                         <button class="main-btn btn-hover w-100 mt-4" type="submit"> Soumettre</button>
                     </div>
             </div>
-            </form> 
+            </form>
 
             <div class="new-sign-link">
                 rAlready have an account?<a class="signup-link" href="{{ route('login') }}">Sign In</a>

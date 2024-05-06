@@ -17,15 +17,14 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('slug');
             $table->string('place');
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->longtext('description');
             $table->date('date');
             $table->boolean('is_active')->default(true);
             $table->time('start_at')->nullable();
             $table->integer('duration')->nullable();
-            $table->string('type');
-            $table->string('price')->default(1);
+            $table->string('type'); //free or paid
             $table->timestamps();
         });
     }

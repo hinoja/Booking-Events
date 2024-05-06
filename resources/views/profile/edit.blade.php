@@ -1,32 +1,3 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
 @extends('layout.front')
 @section('title', __('Subscriber profile'))
 @section('content')
@@ -115,185 +86,73 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="aboutModalLabel">Edit Details</h5>
+                    <h5 class="modal-title" id="aboutModalLabel">Modifier vos informations </h5>
                     <button type="button" class="close-model-btn" data-bs-dismiss="modal" aria-label="Close"><i
                             class="uil uil-multiply"></i></button>
                 </div>
-                <div class="modal-body">
-                    <div class="model-content main-form">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">First Name*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="John">
+                <form action="{{ route('profile.update') }}" method="post">
+                    @method('PATCH')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="model-content main-form">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label class="form-label">NOM*</label>
+                                        <input name="name" class="form-control h_40" type="text" placeholder=""
+                                            value="{{ auth()->user()->name }}">
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Last Name*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="Doe">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label class="form-label">Email*</label>
+                                        <input name="email" class="form-control h_40" type="text" placeholder=""
+                                            value="{{ auth()->user()->email }}">
+                                    </div>
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Bio*</label>
-                                    <textarea class="form-textarea" placeholder=""></textarea>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label class="form-label">Biographie *</label>
+                                        <textarea name="biographie" class="form-textarea" placeholder=""></textarea>
+                                    </div>
+                                    <x-input-error :messages="$errors->get('biographie')" class="mt-2" />
+
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Email*</label>
-                                    <input class="form-control h_40" type="text" placeholder=""
-                                        value="Johndoe@example.com">
+
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label class="form-label">TelePhone*</label>
+                                        <input name="phone_number" class="form-control h_40" type="text"
+                                            placeholder="" value="">
+                                        <x-input-error :messages="$errors->get('phoneNumber')" class="mt-2" />
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Phone*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label class="form-label">Date de Naissance </label>
+                                        <input name="birthDate" class="form-control h_40" type="date" placeholder=""
+                                            value="">
+                                    </div>
+                                    <x-input-error :messages="$errors->get('birthDate')" class="mt-2" />
+
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Website*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Facebook*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Instagram*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Twitter*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">LinkedIn*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Youtube*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12">
-                                <h4 class="address-title">Address</h4>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Address 1*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Address 2*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group main-form mt-4">
-                                    <label class="form-label">Country*</label>
-                                    <select class="selectpicker" data-size="5" title="Nothing selected"
-                                        data-live-search="true">
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="Argentina">Argentina</option>
-                                        <option value="Australia">Australia</option>
-                                        <option value="Austria">Austria (Österreich)</option>
-                                        <option value="Belgium">Belgium (België)</option>
-                                        <option value="Bolivia">Bolivia</option>
-                                        <option value="Brazil">Brazil</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Chile">Chile</option>
-                                        <option value="Colombia">Colombia</option>
-                                        <option value="Costa Rica">Costa Rica</option>
-                                        <option value="Cyprus">Cyprus</option>
-                                        <option value="Czech Republic">Czech Republic</option>
-                                        <option value="Denmark">Denmark</option>
-                                        <option value="Dominican Republic">Dominican Republic</option>
-                                        <option value="Estonia">Estonia</option>
-                                        <option value="Finland">Finland</option>
-                                        <option value="France">France</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="Greece">Greece</option>
-                                        <option value="Hong Kong">Hong Kong</option>
-                                        <option value="Iceland">Iceland</option>
-                                        <option value="India">India</option>
-                                        <option value="Indonesia">Indonesia</option>
-                                        <option value="Ireland">Ireland</option>
-                                        <option value="Israel">Israel</option>
-                                        <option value="Italy">Italy</option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="Latvia">Latvia</option>
-                                        <option value="Lithuania">Lithuania</option>
-                                        <option value="Luxembourg">Luxembourg</option>
-                                        <option value="Malaysia">Malaysia</option>
-                                        <option value="Mexico">Mexico</option>
-                                        <option value="Nepal">Nepal</option>
-                                        <option value="Netherlands">Netherlands</option>
-                                        <option value="New Zealand">New Zealand</option>
-                                        <option value="Norway">Norway</option>
-                                        <option value="Paraguay">Paraguay</option>
-                                        <option value="Peru">Peru</option>
-                                        <option value="Philippines">Philippines</option>
-                                        <option value="Poland">Poland</option>
-                                        <option value="Portugal">Portugal</option>
-                                        <option value="Singapore">Singapore</option>
-                                        <option value="Slovakia">Slovakia</option>
-                                        <option value="Slovenia">Slovenia</option>
-                                        <option value="South Africa">South Africa</option>
-                                        <option value="South Korea">South Korea</option>
-                                        <option value="Spain">Spain</option>
-                                        <option value="Sweden">Sweden</option>
-                                        <option value="Switzerland">Switzerland</option>
-                                        <option value="Tanzania">Tanzania</option>
-                                        <option value="Thailand">Thailand</option>
-                                        <option value="Turkey">Turkey</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="United States">United States</option>
-                                        <option value="Vietnam">Vietnam</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">State*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">City/Suburb*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="form-group mt-4">
-                                    <label class="form-label">Zip/Post Code*</label>
-                                    <input class="form-control h_40" type="text" placeholder="" value="">
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="co-main-btn min-width btn-hover h_40" data-bs-target="#aboutModal"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="main-btn min-width btn-hover h_40">Update</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="co-main-btn min-width btn-hover h_40" data-bs-target="#aboutModal"
+                            data-bs-toggle="modal" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="main-btn min-width btn-hover h_40">Mettre a jour</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -310,10 +169,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <div class="cover-img-btn">
-                                    <input type="file" id="cover-img">
-                                    <label for="cover-img"><i class="fa-solid fa-panorama me-3"></i>Change Image</label>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -325,11 +181,9 @@
                         <div class="col-xl-4 col-lg-5 col-md-12">
                             <div class="main-card user-left-dt">
                                 <div class="user-avatar-img">
-                                    <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) :  asset('images/profile-imgs/img-13.png') }}" alt="">
-                                    <div class="avatar-img-btn">
-                                        <input type="file" id="avatar-img">
-                                        <label for="avatar-img"><i class="fa-solid fa-camera"></i></label>
-                                    </div>
+                                    <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('images/profile-imgs/img-13.png') }}"
+                                        alt="">
+
                                 </div>
                                 <div class="user-dts">
                                     <h4 class="user-name">{{ Auth::user()->name }}<span class="verify-badge"><i
@@ -343,11 +197,13 @@
                                 @if (auth()->user()->role_id === 2)
                                     {{-- organisator --}}
                                     <div class="user-btns">
-                                        <a href="my_organisation_dashboard.html"
-                                            class="co-main-btn co-btn-width min-width d-inline-block h_40">My
-                                            Organisation<i class="fa-solid fa-right-left ms-3"></i></a>
+                                        <a href="{{ route('admin.events.index') }}"
+                                            class="co-main-btn co-btn-width min-width d-inline-block h_40">Mon
+                                            environnement de Gestion
+                                            <i class="fa-solid fa-right-left ms-3"></i></a>
                                     </div>
                                 @endif
+
                                 <div class="profile-social-link">
                                     <h6>Les reseaux sociaux</h6>
                                     <div class="social-links">
@@ -374,13 +230,13 @@
                             <div class="right-profile">
                                 <div class="profile-tabs">
                                     <ul class="nav nav-pills nav-fill p-2 garren-line-tab" id="myTab" role="tablist">
-                                        @if (auth()->user()->role_id === 2)
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="feed-tab" data-bs-toggle="tab"
-                                                    href="#feed" role="tab" aria-controls="feed"
-                                                    aria-selected="true"><i class="fa-solid fa-house"></i>Home</a>
-                                            </li>
-                                        @endif
+                                        {{-- @if (auth()->user()->role_id === 2) --}}
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="feed-tab" data-bs-toggle="tab"
+                                                href="#feed" role="tab" aria-controls="feed"
+                                                aria-selected="true"><i class="fa-solid fa-house"></i>Acceuil</a>
+                                        </li>
+                                        {{-- @endif --}}
                                         <li class="nav-item">
                                             <a class="nav-link" id="about-tab" data-bs-toggle="tab" href="#about"
                                                 role="tab" aria-controls="about" aria-selected="false"><i
@@ -391,54 +247,49 @@
                                                 role="tab" aria-controls="setting" aria-selected="false"><i
                                                     class="fa-solid fa-gear"></i>Paramètres</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders"
-                                                role="tab" aria-controls="orders" aria-selected="false"><i
-                                                    class="fa-solid fa-box"></i>My Orders</a>
-                                        </li>
+
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade active show" id="feed" role="tabpanel"
                                             aria-labelledby="feed-tab">
-                                            <div class="nav my-event-tabs mt-4" role="tablist">
-                                                <button class="event-link active" data-bs-toggle="tab"
-                                                    data-bs-target="#saved" type="button" role="tab"
-                                                    aria-controls="saved" aria-selected="true"><span
-                                                        class="event-count">1</span><span>Saved Events</span></button>
-                                                <button class="event-link" data-bs-toggle="tab"
-                                                    data-bs-target="#organised" type="button" role="tab"
-                                                    aria-controls="organised" aria-selected="false"><span
-                                                        class="event-count">2</span><span>Organised Events</span></button>
-                                                <button class="event-link" data-bs-toggle="tab"
-                                                    data-bs-target="#attending" type="button" role="tab"
-                                                    aria-controls="attending" aria-selected="false"><span
-                                                        class="event-count">1</span><span>Attending Events</span></button>
-                                            </div>
+
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="saved" role="tabpanel">
                                                     <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="main-card mt-4">
-                                                                <div class="card-top p-4">
-                                                                    <div class="card-event-img">
-                                                                        <img src="images/event-imgs/img-6.jpg"
-                                                                            alt="">
-                                                                    </div>
-                                                                    <div class="card-event-dt">
-                                                                        <h5>Step Up Open Mic Show</h5>
-                                                                        <div class="evnt-time">Thu, Jun 30, 2022 4:30 AM
+                                                        @foreach ($events as $event)
+                                                            <div class="col-md-12">
+                                                                <div class="main-card mt-4">
+                                                                    <div class="card-top p-4">
+                                                                        <div class="card-event-img">
+                                                                            <img src="{{ $event->image ? Storage::url($event->image) : asset('images/event-imgs/img-1.jpg') }}"
+                                                                                alt="">
                                                                         </div>
-                                                                        <div class="event-btn-group">
-                                                                            <button class="esv-btn saved-btn me-2"><i
-                                                                                    class="fa-regular fa-bookmark me-2"></i>Save</button>
-                                                                            <button class="esv-btn me-2"
-                                                                                onclick="window.location.href='online_event_detail_view.html'"><i
-                                                                                    class="fa-solid fa-arrow-up-from-bracket me-2"></i>View</button>
+                                                                        <div class="card-event-dt">
+                                                                            <h5>{{ $event->name }}</h5>
+                                                                            <div class="evnt-time">
+                                                                                {{ $event->formatDate($event->date) }}
+                                                                                {{ $event->start_at }}
+                                                                            </div>
+                                                                            <div class="event-btn-group">
+                                                                                @if (auth()->user()->role_id == 2)
+                                                                                    <button class="esv-btn saved-btn me-2"
+                                                                                        onclick="window.location.href='{{ route('admin.events.index') }}'">
+
+
+                                                                                        <i
+                                                                                            class="fa-regular fa-bookmark me-2"></i>Gérer</button>
+                                                                                @endif
+                                                                                <button class="esv-btn me-2"
+                                                                                    onclick="window.location.href='{{ route('front.event.show', $event) }}'">
+                                                                                    <i
+                                                                                        class="fa-solid fa-arrow-up-from-bracket me-2"></i>Voir</a>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @endforeach
+
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="organised" role="tabpanel">
@@ -529,7 +380,8 @@
                                                         {{-- <span>{{ Auth::user()->role }}</span> --}}
                                                     </div>
                                                     <div class="about-step">
-                                                        <h5>Tell us about yourself and let people know who you are</h5>
+                                                        <h5>Dites nous quelques chose a propos de vous et laissez les gens
+                                                            le savoir</h5>
                                                         <p class="mb-0">Lorem ipsum dolor sit amet, consectetur
                                                             adipiscing elit. Ut tincidunt interdum nunc et auctor. Phasellus
                                                             quis pharetra sapien. Integer ligula sem, sodales vitae varius
@@ -576,18 +428,14 @@
                                                             <button class="tab-link active" data-bs-toggle="tab"
                                                                 data-bs-target="#tab-01" type="button" role="tab"
                                                                 aria-controls="tab-01" aria-selected="true"><i
-                                                                    class="fa-solid fa-user me-3"></i></i>
-                                                                {{ __('Profile Information') }}</button>
-                                                            <button class="tab-link" data-bs-toggle="tab"
-                                                                data-bs-target="#tab-02" type="button" role="tab"
-                                                                aria-controls="tab-02" aria-selected="false"><i
-                                                                    class="fa-solid fa-key me-3"></i>{{ __('Password
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Settings') }}</button>
+                                                                    class="fa-solid fa-key me-3"></i>Paramètres du Mot de
+                                                                Passe </button>
+
                                                             <button class="tab-link" data-bs-toggle="tab"
                                                                 data-bs-target="#tab-03" type="button" role="tab"
                                                                 aria-controls="tab-03" aria-selected="false"><i
                                                                     class="fa-solid fa-trash me-3"></i>
-                                                                {{ __('Delete Account') }}</button>
+                                                                Suppression du compte</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -595,7 +443,7 @@
                                                     <div class="main-card mt-4">
                                                         <div class="tab-content">
                                                             @include('profile.partials.update-profile-information-form')
-                                                            @include('profile.partials.update-password-form')
+                                                            {{-- @include('profile.partials.update-password-form') --}}
                                                             @include('profile.partials.delete-user-form')
                                                         </div>
                                                     </div>

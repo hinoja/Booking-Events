@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use PhpParser\Node\Expr\Cast\String_;
 
 class ManageEventController extends Controller
 {
@@ -15,13 +13,17 @@ class ManageEventController extends Controller
      */
     public function index()
     {
-        $events = Event::query()
-            // ->with('ruole')
-            // ->with('events')
-            ->latest()->paginate(8);
+        
+        $events = Event::query() ->latest()->paginate(8);
         $count = Event::count();
-
-        return view('admin.events', ['events' => $events, 'count' => $count]);
+        $eventsbyOrg = Event::latest()->with(['user'])->where('user_id', auth()->user()->id)->where('is_active', true)->get();
+        $countbyOrganisator = count($eventsbyOrg);
+        return view('admin.events', [
+            'events' => $events,
+            'count' => $count,
+            'countbyOrganisator' => $countbyOrganisator,
+            'eventsbyOrganisator' => $eventsbyOrg
+        ]);
     }
 
     /**
@@ -70,8 +72,10 @@ class ManageEventController extends Controller
             $message = "L'Evènement a été activé avec succès ";
         }
 
-
         $event->save();
+        Toastr()->success($message);
+
+
         return back()->with('success', $message);
     }
 
@@ -81,9 +85,9 @@ class ManageEventController extends Controller
     public function destroy(string $id)
     {
         $event = Event::find($id);
-        // dd($event);
         $event->delete();
 
+        Toastr()->success("L'évènement    . $event->name . a bien été supprimé");
 
         return redirect()->route('admin.events.index')->with('success', "L'évènement    . $event->name . a bien été supprimé");
     }
