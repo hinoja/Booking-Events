@@ -20,7 +20,7 @@ class BookingController extends Controller
             'event_id' => $event->id,
             'number' => $number,
         ]);
-        // Notification::send(Auth::user(), new BookingNotification($event));
+        Notification::send(Auth::user(), new BookingNotification($event));
 
         Toastr()->success("Votre réservation pour l'évènement :  $event->name a bien été pris en compte ! :)");
         return view('front.events.bookingConfirmed', ['event' => $event]);
