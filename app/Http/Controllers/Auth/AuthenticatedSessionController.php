@@ -59,7 +59,7 @@ class AuthenticatedSessionController extends Controller
             $redirect = 'profile.edit';
         }
 
-        Toastr()->success('Hello Dear ' . Auth::user()->name . ':)');
+        Toastr()->info('Salut M./Mme ' . Auth::user()->name . '  :)');
 
         return redirect()->route($redirect);
 

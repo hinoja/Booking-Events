@@ -20,7 +20,7 @@ class ProfileController extends Controller
     {
         if (Auth::user()->role_id == 2) {
 
-            $events = Event::Where('user_id', Auth::user()->id)->get();
+            $events = Event::Where('user_id', Auth::user()->id);
         } else {
             $events_id = DB::table('booking_event')->where('user_id', Auth::user()->id)->pluck('event_id');
 
@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
         return view('profile.edit', [
             'user' => $request->user(),
-            'events' => $events,
+            'events' => $events->get(),
         ]);
     }
 

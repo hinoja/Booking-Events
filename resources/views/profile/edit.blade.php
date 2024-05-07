@@ -291,6 +291,9 @@
                                                         @endforeach
 
                                                     </div>
+                                                    {{-- <div class="mt-5 browse-btn" style="float: right;">
+                                                        {{ $events->links() }}
+                                                    </div> --}}
                                                 </div>
                                                 <div class="tab-pane fade" id="organised" role="tabpanel">
                                                     <div class="row">
